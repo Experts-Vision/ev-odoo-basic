@@ -1,1 +1,0 @@
-from . import whatsapp_service, whatsapp_template
