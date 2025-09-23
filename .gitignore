@@ -61,4 +61,4 @@ Thumbs.db
 # internal scripts
 data/
 license/
-images/
+deploy/backup-docker-images/

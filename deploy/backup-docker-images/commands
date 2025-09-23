@@ -1,0 +1,6 @@
+docker save -o ev-odoo_latest.tar ev-odoo:latest
+docker save -o postgres_15.tar postgres:15
+
+
+docker load -i ev-odoo_latest.tar
+docker load -i postgres_15.tar

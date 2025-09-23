@@ -1,7 +1,7 @@
 services:
   odoo:
     image: ev-odoo:latest
-    command: ["-c", "./run-profiles/local-windows/env.conf", "-i", "factory", "--without-demo", "all"]
+    command: ["-c", "./run-profiles/local-windows/env.conf", "-i", "ev-accounting-basic", "--without-demo", "all"]
     restart: always
     depends_on:
       - postgres
@@ -15,7 +15,7 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_DB: odoo
+      POSTGRES_DB: ev-odoo-basic
       POSTGRES_USER: odoo
       POSTGRES_PASSWORD: odoo
     volumes:
