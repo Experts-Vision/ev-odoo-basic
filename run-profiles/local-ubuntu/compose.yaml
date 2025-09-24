@@ -15,7 +15,7 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_DB: odoo
+      POSTGRES_DB: ev-odoo-basic
       POSTGRES_USER: odoo
       POSTGRES_PASSWORD: odoo
     volumes:
