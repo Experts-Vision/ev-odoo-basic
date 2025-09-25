@@ -1,6 +1,6 @@
 all:
   hosts:
-    odoo-poc:
-      ansible_host: experts-vision-poc.duckdns.org
+    ev-odoo-basic:
+      ansible_host: 3.91.67.155
       ansible_user: ubuntu
-      ansible_ssh_private_key_file: odoo-poc.pem
+      ansible_ssh_private_key_file: ev-odoo-basic.pem
