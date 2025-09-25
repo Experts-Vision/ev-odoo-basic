@@ -1,0 +1,27 @@
+services:
+  odoo:
+    image: ev-odoo-baisc:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["-c", "./run-profiles/cloud-ubuntu/env.conf", "-i", "ev-accounting-basic", "--without-demo", "all"]
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "80:80"
+    volumes:
+      - "../../data/odoo:/var/lib/odoo"
+      - "../../license:/ev-odoo/license"
+
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: ev-odoo-basic
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - "../../data/db:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"

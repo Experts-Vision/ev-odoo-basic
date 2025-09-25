@@ -3,13 +3,26 @@
   become: true
 
   tasks:
+    - name: Copy private SSH key to server (temporary)
+      ansible.builtin.copy:
+        src: id_ed25519
+        dest: /root/.ssh/id_rsa
+        owner: ubuntu
+        group: ubuntu
+        mode: '0600'
+
     - name: Fetch repo updates
       ansible.builtin.git:
-        repo: https://github.com/Mahmoud-Shosha/factory
-        dest: /home/ubuntu/factory
+        repo: git@github.com:Experts-Vision/ev-odoo-basic.git
+        dest: /home/ubuntu/ev-odoo-basic
         version: HEAD
         update: yes
         force: yes
+
+    - name: Remove private SSH key after use
+      ansible.builtin.file:
+        path: /root/.ssh/id_rsa
+        state: absent
 
     - name: Clean up (Remove all Docker containers & images)
       ansible.builtin.shell: |
@@ -23,7 +36,8 @@
         docker image prune -a -f
 
     - name: Build Docker containers
-      shell: docker compose -f /home/ubuntu/factory/odoo-compose.yaml build
+      shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu/compose.yaml build
 
     - name: Start Docker containers
-      shell: docker compose -f /home/ubuntu/factory/odoo-compose.yaml up -d
+      shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu/compose.yaml up -d
+

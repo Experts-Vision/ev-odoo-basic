@@ -1,6 +1,6 @@
 all:
   hosts:
     ev-odoo-basic:
-      ansible_host: 3.91.67.155
+      ansible_host: ev-odoo-basic.duckdns.org
       ansible_user: ubuntu
       ansible_ssh_private_key_file: ev-odoo-basic.pem

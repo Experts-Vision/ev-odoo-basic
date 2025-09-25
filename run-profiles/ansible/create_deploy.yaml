@@ -54,7 +54,7 @@
         group: ubuntu
         mode: '0600'
 
-    - name: Fetch repo
+    - name: Fetch repo updates
       ansible.builtin.git:
         repo: git@github.com:Experts-Vision/ev-odoo-basic.git
         dest: /home/ubuntu/ev-odoo-basic
@@ -79,7 +79,7 @@
         docker image prune -a -f
 
     - name: Build Docker containers
-      shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/local-ubuntu/compose.yaml build
+      shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu/compose.yaml build
 
     - name: Start Docker containers
-      shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/local-ubuntu/compose.yaml up -d
+      shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu/compose.yaml up -d
