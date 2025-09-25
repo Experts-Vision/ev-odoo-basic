@@ -18,6 +18,6 @@ COPY ./run-profiles/cloud-ubuntu/env.conf ./run-profiles/cloud-ubuntu/env.conf
 
 RUN chmod +x ./deploy/docker/entrypoint.sh
 
-EXPOSE 443
+EXPOSE 8069
 
 ENTRYPOINT ["./deploy/docker/entrypoint.sh"]
