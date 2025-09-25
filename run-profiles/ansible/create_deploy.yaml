@@ -81,9 +81,9 @@
     - name: Build Docker containers
       shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/local-ubuntu/compose.yaml build
       become: true
-      become_user: ubuntu
+      become_user: odoo
 
     - name: Start Docker containers
       shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/local-ubuntu/compose.yaml up -d
       become: true
-      become_user: ubuntu
+      become_user: odoo
