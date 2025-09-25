@@ -1,6 +1,6 @@
 FROM odoo:18
 
-#USER root
+USER root
 
 RUN apt update && \
     apt install -y pkg-config libcairo-dev lsof && \
@@ -21,6 +21,6 @@ RUN chmod +x ./deploy/docker/entrypoint.sh
 
 EXPOSE 8069
 
-USER odoo
+#USER odoo
 
 ENTRYPOINT ["./deploy/docker/entrypoint.sh"]
