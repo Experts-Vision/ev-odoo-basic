@@ -1,6 +1,9 @@
 services:
   odoo:
-    image: ev-odoo:latest
+    image: ev-odoo-baisc:latest
+    build:
+      context: ../..
+      dockerfile: Dockerfile
     command: ["-c", "./run-profiles/local-windows/env.conf", "-i", "ev-accounting-basic", "--without-demo", "all"]
     restart: always
     depends_on:
