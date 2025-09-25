@@ -21,6 +21,4 @@ RUN chmod +x ./deploy/docker/entrypoint.sh
 
 EXPOSE 8069
 
-#USER odoo
-
 ENTRYPOINT ["./deploy/docker/entrypoint.sh"]
