@@ -1,6 +1,6 @@
 FROM odoo:18
 
-USER root
+#USER root
 
 RUN apt update && \
     apt install -y pkg-config libcairo-dev lsof && \
