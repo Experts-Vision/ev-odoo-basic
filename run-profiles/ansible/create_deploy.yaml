@@ -46,27 +46,27 @@
 #        name: github.com
 #        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
 #
-#    - name: Copy private SSH key to server (temporary)
-#      ansible.builtin.copy:
-#        src: id_ed25519
-#        dest: /root/.ssh/id_rsa
-#        owner: ubuntu
-#        group: ubuntu
-#        mode: '0600'
-#
-#    - name: Fetch repo
-#      ansible.builtin.git:
-#        repo: git@github.com:Experts-Vision/ev-odoo-basic.git
-#        dest: /home/ubuntu/ev-odoo-basic
-#        version: HEAD
-#        update: yes
-#        force: yes
-#
-#    - name: Remove private SSH key after use
-#      ansible.builtin.file:
-#        path: /root/.ssh/id_rsa
-#        state: absent
-#
+    - name: Copy private SSH key to server (temporary)
+      ansible.builtin.copy:
+        src: id_ed25519
+        dest: /root/.ssh/id_rsa
+        owner: ubuntu
+        group: ubuntu
+        mode: '0600'
+
+    - name: Fetch repo
+      ansible.builtin.git:
+        repo: git@github.com:Experts-Vision/ev-odoo-basic.git
+        dest: /home/ubuntu/ev-odoo-basic
+        version: HEAD
+        update: yes
+        force: yes
+
+    - name: Remove private SSH key after use
+      ansible.builtin.file:
+        path: /root/.ssh/id_rsa
+        state: absent
+
     - name: Clean up (Remove all Docker containers & images)
       ansible.builtin.shell: |
         containers=$(docker ps -aq)
