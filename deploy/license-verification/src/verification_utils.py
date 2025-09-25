@@ -13,7 +13,7 @@ script_dir = Path(__file__).resolve().parent
 signed_key_path = Path("/ev-odoo/license/signed_key.json")
 public_key_path = script_dir.parent / "resources/public_key.pem"
 host_id_path = script_dir.parent / "resources/host_id"
-saved_time_path = Path("/var/lib/odoo/saved_time")
+saved_time_path = Path("/tmp/saved_time")
 LOG_TAG = ">> EXPERTS-VISION LICENSE >>"
 
 
