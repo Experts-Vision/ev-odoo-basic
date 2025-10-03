@@ -14,7 +14,7 @@ WORKDIR /ev-odoo
 COPY ./custom-addons ./custom-addons
 COPY ./deploy/docker/entrypoint.sh ./deploy/docker/entrypoint.sh
 COPY ./deploy/license-verification ./deploy/license-verification
-COPY ./run-profiles/cloud-ubuntu/env.conf ./run-profiles/cloud-ubuntu/env.conf
+COPY ./run-profiles/cloud-ubuntu/odoo/env.conf ./run-profiles/cloud-ubuntu/odoo/env.conf
 
 RUN chmod +x ./deploy/docker/entrypoint.sh
 
