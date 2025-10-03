@@ -15,9 +15,9 @@ services:
   odoo:
     image: ev-odoo-baisc:latest
     build:
-      context: ../../odoo
-      dockerfile: Dockerfile
-    command: ["-c", "./env.conf", "-i", "ev-accounting-basic", "--without-demo", "all"]
+      context: ../../
+      dockerfile: ./run-profiles/cloud-ubuntu/odoo/Dockerfile
+    command: ["-c", "./run-profiles/cloud-ubuntu/odoo/env.conf", "-i", "ev-accounting-basic", "--without-demo", "all"]
     restart: always
     depends_on:
       - postgres
