@@ -1,9 +1,22 @@
 services:
+  odoo-nginx:
+    image: odoo-nginx:latest
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: odoo-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+
   odoo:
     image: ev-odoo-baisc:latest
     build:
       context: ../..
-      dockerfile: ./run-profiles/cloud-ubuntu/Dockerfile
+      dockerfile: odoo/Dockerfile
     command: ["-c", "./run-profiles/cloud-ubuntu/env.conf", "-i", "ev-accounting-basic", "--without-demo", "all"]
     restart: always
     depends_on:

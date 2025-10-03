@@ -1,0 +1,6 @@
+all:
+  hosts:
+    ev-odoo-basic:
+      ansible_host: ev-odoo-basic.duckdns.org
+      ansible_user: ubuntu
+      ansible_ssh_private_key_file: mahmoud-key.pem

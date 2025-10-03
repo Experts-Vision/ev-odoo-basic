@@ -132,7 +132,7 @@ A basic Odoo configuration for basic requirements customers.
     ```cd run-profiles\dev-windows\```
     ```python -m venv venv```
     ```venv\Scripts\activate```
-    ```pip install wheel```
+    ```pip install wheel qifparse Wkhtmltopdf```
     ```pip install -r D:\odoo18\requirements.txt```
     ```pip install D"\odoo18```
   8. Match DB configurations (host, port, username, password) in `./run-profiles/dev-windows/env.conf` and `./run-profiles/dev-windows/compose.yaml`
