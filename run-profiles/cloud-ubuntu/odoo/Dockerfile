@@ -7,7 +7,7 @@ RUN apt update && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir --break-system-packages rlPyCairo schedule
+RUN pip install --no-cache-dir --break-system-packages rlPyCairo schedule qifparse
 
 WORKDIR /ev-odoo
 
