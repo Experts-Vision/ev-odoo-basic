@@ -1,6 +1,14 @@
 all:
   hosts:
-    ev-odoo-basic:
-      ansible_host: 3.223.243.186
+    odoo:
+      ansible_host: odoo.expertsvision.org
       ansible_user: ubuntu
       ansible_ssh_private_key_file: mahmoud-key.pem
+      DOMAIN: "odoo.expertsvision.org"
+      EMAIL: "mahmoud.aboelsoud.p@gmail.com"
+    odoo-dev:
+      ansible_host: odoo-dev.expertsvision.org
+      ansible_user: ubuntu
+      ansible_ssh_private_key_file: mahmoud-key.pem
+      DOMAIN: "odoo-dev.expertsvision.org"
+      EMAIL: "mahmoud.aboelsoud.p@gmail.com"
