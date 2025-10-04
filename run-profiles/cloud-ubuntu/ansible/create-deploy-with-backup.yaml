@@ -1,0 +1,144 @@
+- name: Deploy Odoo with Docker in EC2 instance With a Backup
+  hosts: all
+  become: true
+  environment:
+    DOMAIN: "{{ DOMAIN }}"
+    EMAIL: "{{ EMAIL }}"
+  vars:
+    backup_base: "../backup"
+    remote_user: ubuntu
+    ssh_key_path: "./mahmoud-key.pem"
+    ssh_extra_opts: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
+  tasks:
+    - name: Create directory for Docker GPG key
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+
+    - name: Add Docker GPG key
+      get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
+
+    - name: Add Docker repository
+      shell: |
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+        $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | tee /etc/apt/sources.list.d/docker.list
+        apt update
+
+    - name: Install dependencies
+      apt:
+        name: [ certbot, ca-certificates, curl, gnupg, lsb-release, docker-ce, docker-ce-cli, containerd.io, docker-buildx-plugin, docker-compose-plugin ]
+        state: present
+
+    - name: Add ubuntu to docker group
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes
+
+    - name: Ensure remote backup folders exist
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+      loop:
+        - /home/ubuntu/ev-odoo-basic/data
+        - /home/ubuntu/ev-odoo-basic/license
+        - /etc/letsencrypt/
+      become: true
+
+    - name: Restore certificates
+      ansible.builtin.command: >
+        rsync -avz --rsync-path="sudo rsync"
+        -e "ssh -i {{ ssh_key_path }} {{ ssh_extra_opts }}"
+        {{ backup_base }}/etc/letsencrypt/
+        {{ remote_user }}@{{ ansible_host }}:/etc/letsencrypt/
+      delegate_to: localhost
+      register: cert_restore
+      failed_when: cert_restore.rc not in [0, 23]
+
+    - name: Restore Odoo data folder
+      ansible.builtin.command: >
+        rsync -avz --rsync-path="sudo rsync"
+        -e "ssh -i {{ ssh_key_path }} {{ ssh_extra_opts }}"
+        {{ backup_base }}/home/ubuntu/data/
+        {{ remote_user }}@{{ ansible_host }}:/home/ubuntu/data/
+      delegate_to: localhost
+      register: data_restore
+      failed_when: data_restore.rc not in [0, 23]
+
+    - name: Restore Odoo license folder
+      ansible.builtin.command: >
+        rsync -avz --rsync-path="sudo rsync"
+        -e "ssh -i {{ ssh_key_path }} {{ ssh_extra_opts }}"
+        {{ backup_base }}/home/ubuntu/license/
+        {{ remote_user }}@{{ ansible_host }}:/home/ubuntu/license/
+      delegate_to: localhost
+      register: license_restore
+      failed_when: license_restore.rc not in [0, 23]
+
+    - name: Install TLS Certificate
+      script: ./setup-cert.sh
+
+    - name: Remove unused apt packages
+      apt:
+        autoremove: yes
+        purge: yes
+
+    - name: Clean up apt cache
+      apt:
+        autoclean: yes
+
+    - name: Add github.com to known hosts
+      ansible.builtin.known_hosts:
+        name: github.com
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+
+    - name: Copy private SSH key to server (temporary)
+      ansible.builtin.copy:
+        src: id_ed25519
+        dest: /root/.ssh/id_rsa
+        owner: ubuntu
+        group: ubuntu
+        mode: '0600'
+
+    - name: Fetch repo updates
+      ansible.builtin.git:
+        repo: git@github.com:Experts-Vision/ev-odoo-basic.git
+        dest: /home/ubuntu/ev-odoo-basic
+        version: HEAD
+        update: yes
+        force: yes
+
+    - name: Remove private SSH key after use
+      ansible.builtin.file:
+        path: /root/.ssh/id_rsa
+        state: absent
+
+    - name: Clean up (Remove all Docker containers & images)
+      ansible.builtin.shell: |
+        containers=$(docker ps -aq)
+        if [ -n "$containers" ]; then
+          docker stop $containers
+          docker rm -f $containers
+        else
+          echo "No containers to remove."
+        fi
+        docker image prune -a -f
+
+
+    - name: Build Docker image
+      community.docker.docker_compose_v2:
+        project_src: /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu
+        build: always
+
+    - name: Start Docker containers
+      community.docker.docker_compose_v2:
+        project_src: /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu
+        state: present

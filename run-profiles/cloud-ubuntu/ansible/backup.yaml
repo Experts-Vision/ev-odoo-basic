@@ -1,0 +1,60 @@
+- name: Backup Odoo Instance
+  hosts: all
+  become: true
+  vars:
+    backup_base: "../backup"
+    remote_user: ubuntu
+    ssh_key_path: "./mahmoud-key.pem"
+    ssh_extra_opts: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
+  tasks:
+    - name: Ensure local backup folders exist
+      delegate_to: localhost
+      run_once: true
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - "{{ backup_base }}/etc/letsencrypt"
+        - "{{ backup_base }}/home/ubuntu/data"
+        - "{{ backup_base }}/home/ubuntu/license"
+
+    - name: Remove Docker containers
+      community.docker.docker_compose_v2:
+        project_src: /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu
+        state: absent
+
+    - name: Copy certificates
+      ansible.builtin.command: >
+        rsync -avz --rsync-path="sudo rsync"
+        -e "ssh -i {{ ssh_key_path }} {{ ssh_extra_opts }}"
+        {{ remote_user }}@{{ ansible_host }}:/etc/letsencrypt/
+        {{ backup_base }}/etc/letsencrypt/
+      delegate_to: localhost
+      register: cert_copy
+      failed_when: cert_copy.rc not in [0, 23]
+
+    - name: Copy Odoo data folder
+      ansible.builtin.command: >
+        rsync -avz --rsync-path="sudo rsync"
+        -e "ssh -i {{ ssh_key_path }} {{ ssh_extra_opts }}"
+        {{ remote_user }}@{{ ansible_host }}:/home/ubuntu/data/
+        {{ backup_base }}/home/ubuntu/data/
+      delegate_to: localhost
+      register: data_copy
+      failed_when: data_copy.rc not in [0, 23]
+
+    - name: Copy Odoo license folder
+      ansible.builtin.command: >
+        rsync -avz --rsync-path="sudo rsync"
+        -e "ssh -i {{ ssh_key_path }} {{ ssh_extra_opts }}"
+        {{ remote_user }}@{{ ansible_host }}:/home/ubuntu/license/
+        {{ backup_base }}/home/ubuntu/license/
+      delegate_to: localhost
+      register: license_copy
+      failed_when: license_copy.rc not in [0, 23]
+
+    - name: Start Docker containers
+      community.docker.docker_compose_v2:
+        project_src: /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu
+        state: present

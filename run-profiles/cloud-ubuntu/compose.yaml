@@ -26,8 +26,8 @@ services:
     ports:
       - "8069:8069"
     volumes:
-      - "../../data/odoo:/var/lib/odoo"
-      - "../../license:/ev-odoo/license"
+      - "/home/ubuntu/data/odoo:/var/lib/odoo"
+      - "/home/ubuntu/license:/ev-odoo/license"
 
   postgres:
     image: postgres:15
@@ -37,6 +37,6 @@ services:
       POSTGRES_USER: odoo
       POSTGRES_PASSWORD: odoo
     volumes:
-      - "../../data/db:/var/lib/postgresql/data"
+      - "/home/ubuntu/data/db:/var/lib/postgresql/data"
     ports:
       - "5432:5432"
