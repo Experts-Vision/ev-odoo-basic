@@ -59,6 +59,6 @@ Thumbs.db
 *.swn
 
 # internal scripts
-./data/
+/run-profiles/**/data/
 license/
 deploy/backup-docker-images/
