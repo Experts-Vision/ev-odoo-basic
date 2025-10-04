@@ -6,31 +6,31 @@
     EMAIL: "admin@ev-odoo-basic.duckdns.org"
 
   tasks:
-    - name: Create directory for Docker GPG key
-      file:
-        path: /etc/apt/keyrings
-        state: directory
-        mode: '0755'
-
-    - name: Add Docker GPG key
-      get_url:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        dest: /etc/apt/keyrings/docker.asc
-        mode: '0644'
-
-    - name: Add Docker repository
-      shell: |
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-        $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | tee /etc/apt/sources.list.d/docker.list
-        apt update
-
-    - name: Install dependencies
-      apt:
-        name: [certbot, ca-certificates, curl, gnupg, lsb-release, docker-ce, docker-ce-cli, containerd.io, docker-buildx-plugin, docker-compose-plugin]
-        state: present
-
-    - name: Install TLS Certificate
-      script: ./setup-cert.sh
+#    - name: Create directory for Docker GPG key
+#      file:
+#        path: /etc/apt/keyrings
+#        state: directory
+#        mode: '0755'
+#
+#    - name: Add Docker GPG key
+#      get_url:
+#        url: https://download.docker.com/linux/ubuntu/gpg
+#        dest: /etc/apt/keyrings/docker.asc
+#        mode: '0644'
+#
+#    - name: Add Docker repository
+#      shell: |
+#        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+#        $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | tee /etc/apt/sources.list.d/docker.list
+#        apt update
+#
+#    - name: Install dependencies
+#      apt:
+#        name: [certbot, ca-certificates, curl, gnupg, lsb-release, docker-ce, docker-ce-cli, containerd.io, docker-buildx-plugin, docker-compose-plugin]
+#        state: present
+#
+#    - name: Install TLS Certificate
+#      script: ./setup-cert.sh
 #
 #    - name: Add ubuntu to docker group
 #      user:
@@ -51,7 +51,7 @@
 #      ansible.builtin.known_hosts:
 #        name: github.com
 #        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
-#
+
 #    - name: Copy private SSH key to server (temporary)
 #      ansible.builtin.copy:
 #        src: id_ed25519
@@ -59,20 +59,20 @@
 #        owner: ubuntu
 #        group: ubuntu
 #        mode: '0600'
-#
-#    - name: Fetch repo updates
-#      ansible.builtin.git:
-#        repo: git@github.com:Experts-Vision/ev-odoo-basic.git
-#        dest: /home/ubuntu/ev-odoo-basic
-#        version: HEAD
-#        update: yes
-#        force: yes
-#
+
+    - name: Fetch repo updates
+      ansible.builtin.git:
+        repo: git@github.com:Experts-Vision/ev-odoo-basic.git
+        dest: /home/ubuntu/ev-odoo-basic
+        version: HEAD
+        update: yes
+        force: yes
+
 #    - name: Remove private SSH key after use
 #      ansible.builtin.file:
 #        path: /root/.ssh/id_rsa
 #        state: absent
-#
+
 #    - name: Clean up (Remove all Docker containers & images)
 #      ansible.builtin.shell: |
 #        containers=$(docker ps -aq)
@@ -83,9 +83,15 @@
 #          echo "No containers to remove."
 #        fi
 #        docker image prune -a -f
-#
-#    - name: Build Docker containers
-#      shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu/compose.yaml build
-#
-#    - name: Start Docker containers
-#      shell: docker compose -f /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu/compose.yaml up -d
+
+
+    - name: Build Docker image
+      community.docker.docker_compose_v2:
+        project_src: /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu
+        build: always
+
+
+    - name: Start Docker containers
+      community.docker.docker_compose_v2:
+        project_src: /home/ubuntu/ev-odoo-basic/run-profiles/cloud-ubuntu
+        state: present
