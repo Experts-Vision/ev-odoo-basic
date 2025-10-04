@@ -4,6 +4,8 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
+      args:
+        DOMAIN: ${DOMAIN}
     container_name: odoo-nginx
     restart: always
     ports:
