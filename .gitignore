@@ -62,3 +62,6 @@ Thumbs.db
 /run-profiles/**/data/
 license/
 deploy/backup-docker-images/
+
+
+data/
