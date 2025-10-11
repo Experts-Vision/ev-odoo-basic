@@ -8,7 +8,7 @@
     """,
     "author": "Experts Vision Company",
     "website": "https://expertsvision.org",
-    "depends": ["base", ],
+    "depends": ["base", "base_accounting_kit"],
     "data": [],
     "demo": [],
     "application": True,

@@ -64,7 +64,6 @@ license/
 deploy/backup-docker-images/
 
 
-data/
 
 # Development scripts
 start-dev.bat
