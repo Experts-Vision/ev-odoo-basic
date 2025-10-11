@@ -60,6 +60,7 @@ Thumbs.db
 
 # internal scripts
 /run-profiles/**/data/
+/run-profiles/cloud-ubuntu/ansible/backup
 license/
 deploy/backup-docker-images/
 
