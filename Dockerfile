@@ -11,7 +11,8 @@ RUN pip install --no-cache-dir --break-system-packages rlPyCairo schedule
 
 WORKDIR /ev-odoo
 
-COPY ./custom-addons ./custom-addons
+COPY ./dependencies ./dependencies
+COPY ./ev_addons ./ev_addons
 COPY ./deploy/docker/entrypoint.sh ./deploy/docker/entrypoint.sh
 COPY ./deploy/license-verification ./deploy/license-verification
 COPY ./run-profiles/local-ubuntu/env.conf ./run-profiles/local-ubuntu/env.conf

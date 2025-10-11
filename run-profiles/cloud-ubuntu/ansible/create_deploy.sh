@@ -9,5 +9,5 @@ docker run --rm -v ${PWD}:/cloud-ubuntu \
   alpine/ansible bash -c "
     cd /cloud-ubuntu/ansible &&
     chmod 600 ./mahmoud-key.pem &&
-    ansible-playbook -i inventory.yaml create-deploy.yaml -l $SERVER_NAME
+    ansible-playbook -i inventory.yaml create_deploy.yaml -l $SERVER_NAME
   "
