@@ -105,7 +105,7 @@ A basic Odoo configuration for basic requirements customers.
     ```pip install /opt/odoo18```
   8. Match DB configurations (host, port, username, password) in `./run-profiles/dev-ubuntu/env.conf` and `./run-profiles/dev-ubuntu/compose.yaml`
   9. Run Odoo
-    ```/opt/odoo18/odoo-bin -c /run-profiles/dev-ubuntu/env.conf -i ev-odoo-basic --without-demo all```
+    ```/opt/odoo18/odoo-bin -c /run-profiles/dev-ubuntu/env.conf -i ev-accounting-basic --without-demo all```
   10. Open http://localhost:8069
 
 ### dev-windows Run Profile
@@ -137,7 +137,7 @@ A basic Odoo configuration for basic requirements customers.
     ```pip install D"\odoo18```
   8. Match DB configurations (host, port, username, password) in `./run-profiles/dev-windows/env.conf` and `./run-profiles/dev-windows/compose.yaml`
   9. Run Odoo
-    ```python "D:\odoo18\odoo-bin" -c .\env.conf -i ev-odoo-basic --without-demo all```
+    ```python "D:\odoo18\odoo-bin" -c .\env.conf -i ev-accounting-basic --without-demo all```
   10. Open http://localhost:8069
 
 ### local-ubuntu Run Profile
