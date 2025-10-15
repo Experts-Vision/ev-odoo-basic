@@ -8,8 +8,10 @@
     """,
     "author": "Experts Vision Company",
     "website": "https://expertsvision.org",
-    "depends": ["base", "muk_web_theme"],
-    "data": [],
+    "depends": ["base", "muk_web_theme", "muk_web_colors", "muk_web_appsbar"],
+    "data": [
+        "data/theme_defaults.xml",
+    ],
     "demo": [],
     "application": True,
     "license": "AGPL-3",

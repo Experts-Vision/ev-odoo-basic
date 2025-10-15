@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <!-- Set company favicon and background image -->
+        <record id="base.main_company" model="res.company">
+            <field name="favicon" type="base64" file="ev-theme/static/description/fav.png"/>
+            <field name="background_image" type="base64" file="ev-theme/static/description/no-bg.png"/>
+        </record>
+
+    </data>
+</odoo>
