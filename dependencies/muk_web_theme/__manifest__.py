@@ -25,7 +25,6 @@
     ],
     'data': [
         'templates/web_layout.xml',
-        'views/res_config_settings.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [
