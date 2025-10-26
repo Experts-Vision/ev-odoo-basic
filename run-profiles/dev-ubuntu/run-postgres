@@ -7,7 +7,7 @@ echo "This will create a Postgres Docker container under namespace $NAME_SPACE"
 read -p "Type 'ok' to continue: " user_input
 
 if [[ "$user_input" == "ok" ]]; then
-    docker-compose -f $SCRIPT_DIR/postgres-compose.yaml -p "$NAME_SPACE" up -d
+    docker-compose -f $SCRIPT_DIR/compose.yaml -p "$NAME_SPACE" up -d
 else
     echo "Aborted"
     exit 1

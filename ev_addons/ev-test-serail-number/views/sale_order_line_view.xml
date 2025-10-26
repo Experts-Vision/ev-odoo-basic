@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit sale order form view to add serial number field to order lines -->
+        <record id="view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_template_id']" position="after">
+                    <field name="serial_number" string="Serial Number" domain="serial_number_domain"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit sale order line tree view to add serial number field -->
+        <!-- <record id="view_order_line_tree_inherit" model="ir.ui.view">
+            <field name="name">sale.order.line.tree.inherit</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_uom_qty']" position="after">
+                    <field name="serial_number" string="Serial Number"/>
+                </xpath>
+            </field>
+        </record> -->
+    </data>
+</odoo>
