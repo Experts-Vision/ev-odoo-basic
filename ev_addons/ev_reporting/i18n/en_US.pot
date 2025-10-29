@@ -1,0 +1,43 @@
+# Translation file for EV Reporting - Test Report
+# Copyright (C) 2024 Experts Vision Company
+# This file is distributed under the same license as the EV Reporting module.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: EV Reporting 18.0\n"
+"Report-Msgid-Bugs-To: support@expertsvision.org\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: ev_reporting
+#: code:addons/ev_reporting/reports/test.xml:0
+msgid "Custom Report for Testing"
+msgstr ""
+
+#. module: ev_reporting
+#: code:addons/ev_reporting/reports/test.xml:0
+msgid "Order Date:"
+msgstr ""
+
+#. module: ev_reporting
+#: code:addons/ev_reporting/reports/test.xml:0
+msgid "Order Details"
+msgstr ""
+
+#. module: ev_reporting
+#: code:addons/ev_reporting/reports/test.xml:0
+msgid "Order Number:"
+msgstr ""
+
+#. module: ev_reporting
+#: code:addons/ev_reporting/reports/test.xml:0
+msgid "Purchase Order"
+msgstr ""
+
+#. module: ev_reporting
+#: code:addons/ev_reporting/reports/test.xml:0
+msgid "Vendor Information"
+msgstr ""

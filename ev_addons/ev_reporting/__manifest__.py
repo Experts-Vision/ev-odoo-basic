@@ -11,8 +11,16 @@
     "depends": ["base", "purchase"],
     "data": [
         "reports/test.xml",
-        "reports/report_action.xml"
+        "reports/report_action.xml",
     ],
+    "assets": {
+        "web.report_assets_common": [
+            "ev_reporting/static/src/scss/report.scss",
+        ],
+          "web.report_assets_pdf": [
+        "ev_reporting/static/src/scss/report.scss"
+    ],
+    },
     "demo": [],
     "application": False,
     "license": "AGPL-3",
