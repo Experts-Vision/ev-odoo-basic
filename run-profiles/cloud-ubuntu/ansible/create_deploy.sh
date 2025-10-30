@@ -2,7 +2,7 @@
 set -e
 
 SERVER_NAME="$1"
-cd /mnt/d/mahmoud/ev-odoo-basic/run-profiles/cloud-ubuntu
+cd /home/kareem-shousha/EV/ev-odoo-basic/run-profiles/cloud-ubuntu
 
 docker run --rm -v ${PWD}:/cloud-ubuntu \
   -e ANSIBLE_HOST_KEY_CHECKING=False \
