@@ -43,11 +43,12 @@ def verify_license(data):
     data_dict = ast.literal_eval(data.decode('utf-8'))
     print(f"{LOG_TAG} License Data: {data_dict}")
     host_id = host_id_path.read_text().strip()
-    current_date = datetime.now().strftime("%d-%m-%Y")
+    current_date = datetime.now()
+    expiry_date = datetime.strptime(data_dict["expiry"], "%d-%m-%Y")
     print(f"{LOG_TAG} Actual host_id: {host_id}")
-    print(f"{LOG_TAG} current_date: {current_date}")
+    print(f"{LOG_TAG} current_date: {current_date.strftime('%d-%m-%Y')}")
 
-    if host_id != data_dict["host_id"] or current_date > data_dict["expiry"]:
+    if host_id != data_dict["host_id"] or current_date > expiry_date:
         shutdown()
 
 
