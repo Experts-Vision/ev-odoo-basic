@@ -19,7 +19,7 @@ services:
     build:
       context: ../../
       dockerfile: ./run-profiles/cloud-ubuntu/odoo/Dockerfile
-    command: ["-c", "./run-profiles/cloud-ubuntu/odoo/env.conf", "--without-demo", "all", "-i", "base"]
+    command: ["-c", "./run-profiles/cloud-ubuntu/odoo/env.conf", "--without-demo", "all"]
     restart: always
     depends_on:
       - postgres
