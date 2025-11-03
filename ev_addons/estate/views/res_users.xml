@@ -1,0 +1,16 @@
+<odoo>
+    <record id="res_users_property_from_view_extenstion" model="ir.ui.view">
+        <field name="name">res.users.property.from.view.extenstion</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_simple_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="button_box">
+                    <button name="%(estate.action_users_estate_property)d" type="action" class="oe_stat_button" icon="fa-briefcase">
+                        <field name="property_count" widget="statinfo" string="Properties"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -12,6 +12,7 @@
         'views/actions.xml',
         'views/menus.xml',
         'views/views.xml',
+        'views/res_users.xml'
     ],
     'installable': True,
     'application': True,

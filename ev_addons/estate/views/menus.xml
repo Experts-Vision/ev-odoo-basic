@@ -1,5 +1,10 @@
 <odoo>
     <menuitem id="estate_menu" name="Estate">
         <menuitem id="estate_property_menu" name="Properties" action="action_estate_property" />
+        <menuitem id="estate_configuration_menu" name="Configuration">
+            <menuitem id="estate_type_menu" name="Types" action="action_estate_type" />
+            <menuitem id="estate_tags_menu" name="Tags" action="action_estate_tags" />
+        </menuitem>
+
     </menuitem>
 </odoo>
