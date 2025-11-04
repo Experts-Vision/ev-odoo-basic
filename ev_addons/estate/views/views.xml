@@ -4,6 +4,7 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <list string="Estate Property" decoration-success="state == 'offer_accepted'" decoration-info="offer_ids" decoration-muted="state == 'sold'">
+                <field name="name" />
                 <field name="type_id" />
                 <!-- <field name="description" /> -->
                 <field name="postcode" />
@@ -23,13 +24,14 @@
         <field name="arch" type="xml">
             <form string="Estate Property">
                 <header>
-                    <button type="object" string="Sell" name="sell_property" class="btn btn-primary" invisible="state != 'new'" />
-                    <button type="object" string="Cancel" name="cancel_property" invisible="state != 'new'" />
+                    <button type="object" string="Sell" name="sell_property" class="btn btn-primary" invisible="(state == 'sold' or state == 'canceled')" />
+                    <button type="object" string="Cancel" name="cancel_property" invisible="(state == 'sold' or state == 'canceled')" />
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received, offer_accepted, sold,canceled"/>
                 </header>
                 <sheet>
                     <group>
                         <group>
+                            <field name="name" />
                             <field name="type_id" options="{'no_create': True}"/>
                             <field name="postcode" />
                             <field name="date_availability" />
@@ -77,7 +79,7 @@
                 <field name="type_id" />
                 <!-- <field name="description" /> -->
                 <field name="postcode" />
-                <filter string="New" name="new" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]" />
+                <!-- <filter string="New" name="new" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]" /> -->
                 <filter string="State" name="state" context="{'group_by':'state'}" />
             </search>
         </field>
@@ -113,11 +115,11 @@
             <form>
 
                 <sheet>
-                        <div class="oe_button_box" name="button_box">
-                            <button name="%(estate.action_estate_offer)d" type="action" class="oe_stat_button" icon="fa-briefcase">
-                                <field name="offer_count" widget="statinfo" string="Offers"/>
-                            </button>
-                        </div>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(estate.action_estate_offer)d" type="action" class="oe_stat_button" icon="fa-briefcase">
+                            <field name="offer_count" widget="statinfo" string="Offers"/>
+                        </button>
+                    </div>
                     <group>
                         <field name="name"/>
                         <field name="description"/>
@@ -156,6 +158,49 @@
                 <field name="description"/>
                 <field name="property_ids"/>
             </list>
+        </field>
+    </record>
+
+    <record id="estate_property_view_kanban" model="ir.ui.view">
+        <field name="name">estate.property.kanban</field>
+        <field name="model">estate.property</field>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" disable_drag_drop="1">
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_card_content">
+                            <strong>
+                                <field name="name"/>
+                            </strong>
+                            <div>
+                                Expected Price: 
+                                <b>
+                                    <field name="expected_price"/>
+                                </b>
+ -
+                            <span t-if="record.state.raw_value  == 'offer_received'">
+                                  Best Offer: 
+                                <b>
+                                    <field name="best_offer"/>
+                                </b>
+                            </span>
+                            </div>
+                            <div t-if="record.state.raw_value == 'offer_accepted'" style="margin: 10px 0;">
+                                Selling Price: 
+                                <b>
+                                    <field name="selling_price"/>
+                                </b>
+                            </div>
+
+                            <div style="margin: 10px 0;">
+                                <field name="tags_ids" widget="many2many_tags"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 </odoo>

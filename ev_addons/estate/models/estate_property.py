@@ -13,7 +13,7 @@ class EstateProperty(models.Model):
     ]
 
     # fields data for the model
-    name = fields.Char(string='Name', related='type_id.name')
+    name = fields.Char(string='Name')
     type_id = fields.Many2one(string='Type', comodel_name='estate.type')
     # description = fields.Text(string='Description', required=True)
     tags_ids = fields.Many2many(string="Tags", comodel_name="estate.tags")

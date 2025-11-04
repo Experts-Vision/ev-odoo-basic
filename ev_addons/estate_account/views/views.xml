@@ -1,0 +1,16 @@
+<odoo>
+    <!-- Action to view invoices -->
+    <record id="action_estate_invoice" model="ir.actions.act_window">
+        <field name="name">Estate Invoices</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,form</field>
+        
+    </record>
+
+    <!-- Menu item to access invoices -->
+    <menuitem id="estate_invoice_menu" 
+              name="Invoices" 
+              action="action_estate_invoice" 
+              parent="estate.estate_menu" 
+              sequence="20"/>
+</odoo>
