@@ -764,7 +764,7 @@ msgstr "الرصيد المصرفي والنقدي"
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "Balance"
-msgstr "توازن"
+msgstr "الرصيد"
 
 #. module: base_accounting_kit
 #: model:account.financial.report,name:base_accounting_kit.account_financial_report_balancesheet0
@@ -1165,7 +1165,7 @@ msgstr "أنشئ في"
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "Credit"
-msgstr "ائتمان"
+msgstr "دائن"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_recurring_payments__credit_account
