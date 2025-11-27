@@ -67,4 +67,8 @@ deploy/backup-docker-images/
 
 
 # Development scripts
+start-dev.bat
+start-dev-colored.ps1
+color_logs.py
+setup-dev.bat
 run-dev.sh
