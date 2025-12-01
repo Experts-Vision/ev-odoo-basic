@@ -1,152 +1,390 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <data noupdate="1">
-        <!-- Financial Reports data records in the model account.financial.report-->
-        <record id="account_financial_report_profitandloss0"
-                model="account.financial.report">
-            <field name="name">Profit and Loss</field>
-            <field name="sign" eval="'-1'"/>
-            <field name="type">sum</field>
-        </record>
-<!--    Income report -->
-        <record id="account_financial_report_income0"
-                model="account.financial.report">
-            <field name="name">Income</field>
-            <field name="sign" eval="'-1'"/>
-            <field name="sequence">1</field>
-            <field name="parent_id"
-                   ref="account_financial_report_profitandloss0"/>
-            <field name="display_detail">detail_with_hierarchy</field>
-            <field name="type">sum</field>
-        </record>
-<!--    Other Income    -->
-        <record id="account_financial_report_other_income0"
-                model="account.financial.report">
-            <field name="name">Other Income</field>
-            <field name="sequence">10</field>
-            <field name="parent_id"
-                   ref="account_financial_report_income0"/>
-            <field name="display_detail">detail_with_hierarchy</field>
-            <field name="type">account_type</field>
-            <field name="account_type_ids">income_other</field>
-        </record>
-<!--    Gross profit    -->
-        <record id="financial_report_gross_profit"
-                model="account.financial.report">
-            <field name="name">Gross Profit</field>
-            <field name="parent_id"
-                   ref="account_financial_report_income0"/>
-            <field name="display_detail">detail_with_hierarchy</field>
-            <field name="type">sum</field>
-            <field name="sequence">3</field>
-        </record>
-<!--    Cost of revenue    -->
-        <record id="financial_report_cost_of_revenue"
-                model="account.financial.report">
-            <field name="name">Cost of Revenue</field>
-            <field name="sequence">10</field>
-            <field name="parent_id"
-                   ref="financial_report_gross_profit"/>
-            <field name="display_detail">detail_with_hierarchy</field>
-            <field name="type">account_type</field>
-            <field name="account_type_ids">expense_direct_cost</field>
-        </record>
-<!--    Operating Income    -->
-        <record id="account_financial_report_operating_income0"
-                model="account.financial.report">
-            <field name="name">Operating Income</field>
-            <field name="sequence">1</field>
-            <field name="parent_id"
-                   ref="financial_report_gross_profit"/>
-            <field name="display_detail">detail_with_hierarchy</field>
-            <field name="type">account_type</field>
-            <field name="account_type_ids">income</field>
-        </record>
-<!--    Expense    -->
-        <record id="account_financial_report_expense0"
-                model="account.financial.report">
-            <field name="name">Expense</field>
-            <field name="sign" eval="'-1'"/>
-            <field name="sequence">2</field>
-            <field name="parent_id"
-                   ref="account_financial_report_profitandloss0"/>
-            <field name="display_detail">detail_with_hierarchy</field>
-            <field name="type">account_type</field>
-            <field name="account_type_ids">expense</field>
-        </record>
-<!--    Balance Sheet    -->
-        <record id="account_financial_report_balancesheet0"
-                model="account.financial.report">
-            <field name="name">Balance Sheet</field>
-            <field name="type">sum</field>
-        </record>
-<!--    Assets    -->
-        <record id="account_financial_report_assets0"
-                model="account.financial.report">
-            <field name="name">Assets</field>
-            <field name="parent_id"
-                   ref="account_financial_report_balancesheet0"/>
-            <field name="display_detail">detail_with_hierarchy</field>
-            <field name="type">account_type</field>
-            <field name="account_type_ids">income_other</field>
-        </record>
-<!--    Liability    -->
-        <record id="account_financial_report_liabilitysum0"
-                model="account.financial.report">
-            <field name="name">Liability</field>
-            <field name="sequence">1</field>
-            <field name="parent_id"
-                   ref="account_financial_report_balancesheet0"/>
-            <field name="display_detail">no_detail</field>
-            <field name="type">sum</field>
-        </record>
-<!--    Liability    -->
-        <record id="account_financial_report_liability0"
-                model="account.financial.report">
-            <field name="name">Liability</field>
-            <field name="parent_id"
-                   ref="account_financial_report_liabilitysum0"/>
-            <field name="display_detail">detail_with_hierarchy</field>
-            <field name="type">account_type</field>
-            <field name="account_type_ids">income_other</field>
-        </record>
-<!--    Profit (Loss) to report   -->
-        <record id="account_financial_report_profitloss_toreport0"
-                model="account.financial.report">
-            <field name="name">Profit (Loss) to report</field>
-            <field name="parent_id"
-                   ref="account_financial_report_liabilitysum0"/>
-            <field name="display_detail">no_detail</field>
-            <field name="type">account_report</field>
-            <field name="account_report_id"
-                   ref="account_financial_report_profitandloss0"/>
-        </record>
-<!--    Common Report    -->
-        <record id="account_report_view_form" model="ir.ui.view">
-            <field name="name">account.report.view.form</field>
-            <field name="model">account.report</field>
-            <field name="arch" type="xml">
-                <form string="Report Options">
-                    <group col="4">
-                        <field name="target_move" widget="radio"/>
-                        <field name="date_from"/>
-                        <field name="date_to"/>
-                    </group>
-                    <group>
-                        <field name="journal_ids" widget="many2many_tags"
-                               options="{'no_create': True}"/>
-                        <field name="company_id" invisible="1"/>
-                    </group>
-                    <footer>
-                        <button name="check_report" string="Print"
-                                type="object" default_focus="1"
-                                class="oe_highlight"
-                                data-hotkey="q"/>
-                        <button string="Cancel" class="btn btn-secondary"
-                                special="cancel" data-hotkey="z"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
-    </data>
+        <data noupdate="0">
+                <!-- Financial Reports data records in the model account.financial.report-->
+
+                <!-- Profit and Loss (Top-level, Account Type) -->
+                <record id="account_financial_report_profitandloss0" model="account.financial.report">
+                        <field name="name">Profit and Loss</field>
+                        <field name="sequence">0</field>
+                        <field name="sign" eval="'-1'"/>
+                        <field name="type">account_type</field>
+                        <field name="display_detail">no_detail</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_expense'), ref('account_type_expense_depreciation'), ref('account_type_expense_direct_cost'), ref('account_type_income'), ref('account_type_income_other')])]"/>
+                </record>
+
+                <!-- Income (View, child of Profit and Loss) -->
+                <record id="account_financial_report_income0" model="account.financial.report">
+                        <field name="name">Income</field>
+                        <field name="sign" eval="'-1'"/>
+                        <field name="sequence">1</field>
+                        <field name="parent_id" ref="account_financial_report_profitandloss0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">sum</field>
+                </record>
+
+                <!-- Other Income (View, child of Income) -->
+                <record id="account_financial_report_other_income0" model="account.financial.report">
+                        <field name="name">Other Income</field>
+                        <field name="sequence">5</field>
+                        <field name="sign" eval="'1'"/>
+                        <field name="parent_id" ref="account_financial_report_income0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">sum</field>
+                </record>
+
+                <!-- Gross Profit (Account Type, child of Profit and Loss) -->
+                <record id="financial_report_gross_profit" model="account.financial.report">
+                        <field name="name">Gross Profit</field>
+                        <field name="sequence">3</field>
+                        <field name="sign" eval="'-1'"/>
+                        <field name="parent_id" ref="account_financial_report_profitandloss0"/>
+                        <field name="display_detail">no_detail</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_expense'), ref('account_type_expense_direct_cost'), ref('account_type_income')])]"/>
+                </record>
+
+                <!-- Expense (Account Type, child of Profit and Loss) -->
+                <record id="account_financial_report_expense0" model="account.financial.report">
+                        <field name="name">Expense</field>
+                        <field name="sequence">3</field>
+                        <field name="parent_id" ref="account_financial_report_profitandloss0"/>
+                        <field name="display_detail">no_detail</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_expense'), ref('account_type_expense_depreciation'), ref('account_type_expense_direct_cost')])]"/>
+                </record>
+
+
+                <!-- Cost of Revenue (Account Type, child of Expense) -->
+                <record id="financial_report_cost_of_revenue" model="account.financial.report">
+                        <field name="name">Cost of Revenue</field>
+                        <field name="sequence">10</field>
+                        <field name="sign" eval="'1'"/>
+                        <field name="parent_id" ref="account_financial_report_expense0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_expense_direct_cost')])]"/>
+                </record>
+
+                <!-- Operating Income (Account Type, child of Income) -->
+                <record id="account_financial_report_operating_income0" model="account.financial.report">
+                        <field name="name">Operating Income</field>
+                        <field name="sign" eval="'1'"/>
+                        <field name="sequence">2</field>
+                        <field name="parent_id" ref="account_financial_report_income0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_income')])]"/>
+                </record>
+
+
+                <!-- Depreciation (Account Type, child of Profit and Loss) -->
+                <record id="account_financial_report_depreciation0" model="account.financial.report">
+                        <field name="name">Depreciation</field>
+                        <field name="sequence">4</field>
+                        <field name="parent_id" ref="account_financial_report_profitandloss0"/>
+                        <field name="display_detail">no_detail</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_expense_depreciation')])]"/>
+                </record>
+
+                <!-- Balance Sheet (Top-level, View) -->
+                <record id="account_financial_report_balancesheet0" model="account.financial.report">
+                        <field name="name">Balance Sheet</field>
+                        <field name="type">sum</field>
+                </record>
+
+                <!-- Liability (View, child of Balance Sheet) -->
+                <record id="account_financial_report_liability0" model="account.financial.report">
+                        <field name="name">Liability</field>
+                        <field name="sequence">1</field>
+                        <field name="parent_id" ref="account_financial_report_balancesheet0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">sum</field>
+                </record>
+
+                <!-- Current Liabilities (Account Type, child of Liability) -->
+                <record id="account_financial_report_current_liabilities0" model="account.financial.report">
+                        <field name="name">Current Liabilities</field>
+                        <field name="sequence">1</field>
+                        <field name="parent_id" ref="account_financial_report_liability0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_liability_payable'), ref('account_type_liability_current')])]"/>
+                </record>
+
+                <!-- Non Current Liabilities (Account Type, child of Liability) -->
+                <record id="account_financial_report_non_current_liabilities0" model="account.financial.report">
+                        <field name="name">Non Current Liabilities</field>
+                        <field name="sequence">2</field>
+                        <field name="parent_id" ref="account_financial_report_liability0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_liability_non_current')])]"/>
+                </record>
+
+                <!-- Assets (View, child of Balance Sheet) -->
+                <record id="account_financial_report_assets0" model="account.financial.report">
+                        <field name="name">Assets</field>
+                        <field name="sequence">0</field>
+                        <field name="sign" eval="'-1'"/>
+                        <field name="parent_id" ref="account_financial_report_balancesheet0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">sum</field>
+                </record>
+
+                <!-- Current Assets (Account Type, child of Assets) -->
+                <record id="account_financial_report_current_assets0" model="account.financial.report">
+                        <field name="name">Current Assets</field>
+                        <field name="sequence">1</field>
+                        <field name="parent_id" ref="account_financial_report_assets0"/>
+                        <field name="display_detail">detail_flat</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_asset_receivable'), ref('account_type_asset_cash'), ref('account_type_asset_current'), ref('account_type_asset_prepayments')])]"/>
+                </record>
+
+                <!-- Non Current Assets (Account Type, child of Assets) -->
+                <record id="account_financial_report_non_current_assets0" model="account.financial.report">
+                        <field name="name">Non Current Assets</field>
+                        <field name="sequence">2</field>
+                        <field name="parent_id" ref="account_financial_report_assets0"/>
+                        <field name="display_detail">detail_flat</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_asset_non_current'), ref('account_type_asset_fixed')])]"/>
+                </record>
+
+                <!-- Equity (Account Type, child of Balance Sheet) -->
+                <record id="account_financial_report_equity0" model="account.financial.report">
+                        <field name="name">Equity</field>
+                        <field name="sequence">3</field>
+                        <field name="sign" eval="'-1'"/>
+                        <field name="parent_id" ref="account_financial_report_balancesheet0"/>
+                        <field name="display_detail">no_detail</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_equity'), ref('account_type_equity_unaffected'), ref('account_type_expense'), ref('account_type_expense_depreciation'), ref('account_type_expense_direct_cost'), ref('account_type_income'), ref('account_type_income_other')])]"/>
+                </record>
+
+                <!-- Profit (Loss) to report (Report Value, child of Equity, value = Profit and Loss) -->
+                <record id="account_financial_report_profitloss_toreport0" model="account.financial.report">
+                        <field name="name">Profit (Loss) to report</field>
+                        <field name="sequence">0</field>
+                        <field name="sign" eval="'-1'"/>
+                        <field name="parent_id" ref="account_financial_report_equity0"/>
+                        <field name="display_detail">no_detail</field>
+                        <field name="type">account_report</field>
+                        <field name="account_report_id" ref="account_financial_report_profitandloss0"/>
+                </record>
+
+                <!-- LIABILITIES + EQUITY (Account Type, child of Balance Sheet) -->
+                <record id="account_financial_report_liabilities_equity0" model="account.financial.report">
+                        <field name="name">Liabilities + Equity</field>
+                        <field name="sequence">3</field>
+                        <field name="parent_id" ref="account_financial_report_balancesheet0"/>
+                        <field name="display_detail">no_detail</field>
+                        <field name="type">account_type</field>
+                        <field name="account_type_ids_many2many" eval="[(6, 0, [ref('account_type_equity'), ref('account_type_equity_unaffected'), ref('account_type_expense'), ref('account_type_expense_depreciation'), ref('account_type_expense_direct_cost'), ref('account_type_income'), ref('account_type_income_other'), ref('account_type_liability_payable'), ref('account_type_liability_current'), ref('account_type_liability_non_current')])]"/>
+                </record>
+
+                <!-- Cash Flow Statement (Top-level, View) -->
+                <record id="account_financial_report_cash_flow0" model="account.financial.report">
+                        <field name="name">Cash Flow Statement</field>
+                        <field name="type">sum</field>
+                </record>
+
+                <!-- Operations (View, child of Cash Flow Statement) -->
+                <record id="account_financial_report_operation0" model="account.financial.report">
+                        <field name="name">Operations</field>
+                        <field name="sequence">1</field>
+                        <field name="parent_id" ref="account_financial_report_cash_flow0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">sum</field>
+                </record>
+
+                <!-- Cash In - Operations (Accounts, child of Operations) -->
+                <record id="cash_in_from_operation0" model="account.financial.report">
+                        <field name="name">Cash In</field>
+                        <field name="sequence">1</field>
+                        <field name="parent_id" ref="account_financial_report_operation0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">accounts</field>
+                </record>
+
+                <!-- Cash Out - Operations (Accounts, child of Operations) -->
+                <record id="cash_out_operation0" model="account.financial.report">
+                        <field name="name">Cash Out</field>
+                        <field name="sequence">2</field>
+                        <field name="parent_id" ref="account_financial_report_operation0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">accounts</field>
+                </record>
+
+                <!-- Investing Activities (View, child of Cash Flow Statement) -->
+                <record id="account_financial_report_investing_activity0" model="account.financial.report">
+                        <field name="name">Investing Activities</field>
+                        <field name="sequence">2</field>
+                        <field name="parent_id" ref="account_financial_report_cash_flow0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">sum</field>
+                </record>
+
+                <!-- Cash In - Investing Activities (Accounts, child of Investing Activities) -->
+                <record id="cash_in_investing0" model="account.financial.report">
+                        <field name="name">Cash In</field>
+                        <field name="sequence">1</field>
+                        <field name="parent_id" ref="account_financial_report_investing_activity0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">accounts</field>
+                </record>
+
+                <!-- Cash Out - Investing Activities (Accounts, child of Investing Activities) -->
+                <record id="cash_out_investing0" model="account.financial.report">
+                        <field name="name">Cash Out</field>
+                        <field name="sequence">2</field>
+                        <field name="parent_id" ref="account_financial_report_investing_activity0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">accounts</field>
+                </record>
+
+                <!-- Financing Activities (View, child of Cash Flow Statement) -->
+                <record id="account_financial_report_financing_activity0" model="account.financial.report">
+                        <field name="name">Financing Activities</field>
+                        <field name="sequence">3</field>
+                        <field name="parent_id" ref="account_financial_report_cash_flow0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">sum</field>
+                </record>
+
+                <!-- Cash In - Financing Activities (Accounts, child of Financing Activities) -->
+                <record id="cash_in_financing0" model="account.financial.report">
+                        <field name="name">Cash In</field>
+                        <field name="sequence">1</field>
+                        <field name="parent_id" ref="account_financial_report_financing_activity0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">accounts</field>
+                </record>
+
+                <!-- Cash Out - Financing Activities (Accounts, child of Financing Activities) -->
+                <record id="cash_out_financing0" model="account.financial.report">
+                        <field name="name">Cash Out</field>
+                        <field name="sequence">2</field>
+                        <field name="parent_id" ref="account_financial_report_financing_activity0"/>
+                        <field name="display_detail">detail_with_hierarchy</field>
+                        <field name="type">accounts</field>
+                </record>
+
+
+                <!-- Account Types Data -->
+                <record id="account_type_asset_receivable" model="account.account.type">
+                        <field name="name">Receivable</field>
+                        <field name="value">asset_receivable</field>
+                </record>
+
+                <record id="account_type_asset_cash" model="account.account.type">
+                        <field name="name">Bank and Cash</field>
+                        <field name="value">asset_cash</field>
+                </record>
+
+                <record id="account_type_asset_current" model="account.account.type">
+                        <field name="name">Current Assets</field>
+                        <field name="value">asset_current</field>
+                </record>
+
+                <record id="account_type_asset_non_current" model="account.account.type">
+                        <field name="name">Non-current Assets</field>
+                        <field name="value">asset_non_current</field>
+                </record>
+
+                <record id="account_type_asset_prepayments" model="account.account.type">
+                        <field name="name">Prepayments</field>
+                        <field name="value">asset_prepayments</field>
+                </record>
+
+                <record id="account_type_asset_fixed" model="account.account.type">
+                        <field name="name">Fixed Assets</field>
+                        <field name="value">asset_fixed</field>
+                </record>
+
+                <record id="account_type_liability_payable" model="account.account.type">
+                        <field name="name">Payable</field>
+                        <field name="value">liability_payable</field>
+                </record>
+
+                <record id="account_type_liability_credit_card" model="account.account.type">
+                        <field name="name">Credit Card</field>
+                        <field name="value">liability_credit_card</field>
+                </record>
+
+                <record id="account_type_liability_current" model="account.account.type">
+                        <field name="name">Current Liabilities</field>
+                        <field name="value">liability_current</field>
+                </record>
+
+                <record id="account_type_liability_non_current" model="account.account.type">
+                        <field name="name">Non-current Liabilities</field>
+                        <field name="value">liability_non_current</field>
+                </record>
+
+                <record id="account_type_equity" model="account.account.type">
+                        <field name="name">Equity</field>
+                        <field name="value">equity</field>
+                </record>
+
+                <record id="account_type_equity_unaffected" model="account.account.type">
+                        <field name="name">Current Year Earnings</field>
+                        <field name="value">equity_unaffected</field>
+                </record>
+
+                <record id="account_type_income" model="account.account.type">
+                        <field name="name">Income</field>
+                        <field name="value">income</field>
+                </record>
+
+                <record id="account_type_income_other" model="account.account.type">
+                        <field name="name">Other Income</field>
+                        <field name="value">income_other</field>
+                </record>
+
+                <record id="account_type_expense" model="account.account.type">
+                        <field name="name">Expenses</field>
+                        <field name="value">expense</field>
+                </record>
+
+                <record id="account_type_expense_depreciation" model="account.account.type">
+                        <field name="name">Depreciation</field>
+                        <field name="value">expense_depreciation</field>
+                </record>
+
+                <record id="account_type_expense_direct_cost" model="account.account.type">
+                        <field name="name">Cost of Revenue</field>
+                        <field name="value">expense_direct_cost</field>
+                </record>
+
+                <record id="account_type_off_balance" model="account.account.type">
+                        <field name="name">Off-Balance Sheet</field>
+                        <field name="value">off_balance</field>
+                </record>
+
+                <!-- Common Report View -->
+                <record id="account_report_view_form" model="ir.ui.view">
+                        <field name="name">account.report.view.form</field>
+                        <field name="model">account.report</field>
+                        <field name="arch" type="xml">
+                                <form string="Report Options">
+                                        <group col="4">
+                                                <field name="target_move" widget="radio"/>
+                                                <field name="date_from"/>
+                                                <field name="date_to"/>
+                                        </group>
+                                        <group>
+                                                <field name="journal_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                                <field name="company_id" invisible="1"/>
+                                        </group>
+                                        <footer>
+                                                <button name="check_report" string="Print" type="object" default_focus="1" class="oe_highlight" data-hotkey="q"/>
+                                                <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                                        </footer>
+                                </form>
+                        </field>
+                </record>
+        </data>
 </odoo>

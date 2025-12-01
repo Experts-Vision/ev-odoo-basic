@@ -215,21 +215,62 @@ class FinancialReport(models.TransientModel):
             elif report.type == 'account_type':
                 # it's the sum the leaf accounts
                 #  with such an account type
+
                 accounts = self.env['account.account'].search([
-                    ('account_type', '=', report.account_type_ids)
+                    ('account_type', 'in', report.account_type_ids_many2many.mapped('value'))
                 ])
-                if report.name == "Expenses":
-                    accounts = self.env['account.account'].search([
-                        ('account_type', 'in', ["expense","expense_depreciation","expense_direct_cost"])
-                    ])
-                if report.name == "Liability":
-                    accounts = self.env['account.account'].search([
-                        ('account_type', 'in', ["liability_payable","equity","liability_current","liability_non_current"])
-                    ])
-                if report.name == "Assets":
-                    accounts = self.env['account.account'].search([
-                        ('account_type', 'in', ["asset_receivable","asset_cash","asset_current","asset_non_current","asset_prepayments","asset_fixed"])
-                    ])
+                # if report.name == "Expenses":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', expense_accounts)
+                #     ])
+                # if report.name == "Income":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', income_accounts)
+                #     ])
+                # if report.name == "Gross Profit":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', gross_profit_accounts)
+                #     ])
+                # if report.name == "Depreciation":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', depreciation_accounts)
+                #     ])
+                # if report.name == "Profit and Loss":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', profit_and_loss_accounts)
+                #     ])
+                # if report.name == "Liability":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', liability_accounts)
+                #     ])
+                # if report.name == "Assets":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', asset_accounts)
+                #     ])
+                # if report.name == "Equity":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', equity_accounts)
+                #     ])
+                # if report.name == "Liabilities + Equity":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', equity_accounts + liability_accounts)
+                #     ])
+                # if report.name == "Current Assets":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', current_assest)
+                #     ])
+                # if report.name == "Non Current Assets":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', non_current_assest)
+                #     ])
+                # if report.name == "Current Liabilities":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', current_liability)
+                #     ])
+                # if report.name == "Non Current Liabilities":
+                #     accounts = self.env['account.account'].search([
+                #         ('account_type', 'in', non_current_liability)
+                #     ])
 
                 res[report.id]['account'] = self._compute_account_balance(
                     accounts)
@@ -290,6 +331,7 @@ class FinancialReport(models.TransientModel):
                     report.style_overwrite) and report.style_overwrite or
                          report.level,
                 'account_type': report.type or False,
+                'display_detail': report.display_detail or False,
                 # used to underline the financial report balances
             }
             if data['debit_credit']:
@@ -428,11 +470,25 @@ class ProfitLossPdf(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data=None):
         """ Provide report values to template """
+        from datetime import datetime
+        # Get current year for display
+        current_year = datetime.now().strftime('%Y')
+        # Try to get year from date_to or date_from
+        report_year = current_year
+        if data and data.get('form'):
+            date_to = data['form'].get('date_to')
+            date_from = data['form'].get('date_from')
+            if date_to:
+                report_year = str(date_to)[:4] if date_to else current_year
+            elif date_from:
+                report_year = str(date_from)[:4] if date_from else current_year
+        
         ctx = {
             'data': data,
             'journal_items': data['journal_items'],
             'report_lines': data['report_lines'],
             'account_report': data['form']['account_report_id'][1],
             'currency': data['currency'],
+            'report_year': report_year,
         }
         return ctx

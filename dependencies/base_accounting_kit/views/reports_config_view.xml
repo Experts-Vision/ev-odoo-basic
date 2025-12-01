@@ -13,6 +13,9 @@
                     <field name="type"/>
                     <field name="sign"/>
                     <field name="style_overwrite"/>
+                    <field name="account_type_ids_many2many" 
+                     invisible="type != 'account_type'"
+                     options="{'no_create': True, 'no_create_edit': True}" widget="many2many_tags"/>
                 </group>
                 <notebook invisible="type not in ['accounts','account_type', 'account_report']">
                     <page string="Report">

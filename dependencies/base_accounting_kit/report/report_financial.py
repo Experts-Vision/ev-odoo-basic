@@ -29,6 +29,7 @@ class AccountTypes(models.Model):
     _name = "account.account.type"
 
     name = fields.Char(string='Account Type', required=True, translate=True)
+    value = fields.Char(string='Account Type Value', required=True)
     type = fields.Selection([
         ('other', 'Regular'),
         ('receivable', 'Receivable'),
@@ -92,9 +93,9 @@ class AccountFinancialReport(models.Model):
     account_report_id = fields.Many2one(
         'account.financial.report',
         'Report Value')
-    # account_type_ids = fields.Many2many(
-    #     'account.account.type',
-    #     'Account Types')
+    account_type_ids_many2many = fields.Many2many(
+        'account.account.type',
+        string="Account Types")
     account_type_ids = fields.Selection(
         selection=[
             ("asset_receivable", "Receivable"),
