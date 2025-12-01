@@ -1,6 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
         <data noupdate="0">
+                <!-- Account Types Data (must be defined before financial reports) -->
+                <record id="account_type_asset_receivable" model="account.account.type">
+                        <field name="name">Receivable</field>
+                        <field name="value">asset_receivable</field>
+                </record>
+
+                <record id="account_type_asset_cash" model="account.account.type">
+                        <field name="name">Bank and Cash</field>
+                        <field name="value">asset_cash</field>
+                </record>
+
+                <record id="account_type_asset_current" model="account.account.type">
+                        <field name="name">Current Assets</field>
+                        <field name="value">asset_current</field>
+                </record>
+
+                <record id="account_type_asset_non_current" model="account.account.type">
+                        <field name="name">Non-current Assets</field>
+                        <field name="value">asset_non_current</field>
+                </record>
+
+                <record id="account_type_asset_prepayments" model="account.account.type">
+                        <field name="name">Prepayments</field>
+                        <field name="value">asset_prepayments</field>
+                </record>
+
+                <record id="account_type_asset_fixed" model="account.account.type">
+                        <field name="name">Fixed Assets</field>
+                        <field name="value">asset_fixed</field>
+                </record>
+
+                <record id="account_type_liability_payable" model="account.account.type">
+                        <field name="name">Payable</field>
+                        <field name="value">liability_payable</field>
+                </record>
+
+                <record id="account_type_liability_credit_card" model="account.account.type">
+                        <field name="name">Credit Card</field>
+                        <field name="value">liability_credit_card</field>
+                </record>
+
+                <record id="account_type_liability_current" model="account.account.type">
+                        <field name="name">Current Liabilities</field>
+                        <field name="value">liability_current</field>
+                </record>
+
+                <record id="account_type_liability_non_current" model="account.account.type">
+                        <field name="name">Non-current Liabilities</field>
+                        <field name="value">liability_non_current</field>
+                </record>
+
+                <record id="account_type_equity" model="account.account.type">
+                        <field name="name">Equity</field>
+                        <field name="value">equity</field>
+                </record>
+
+                <record id="account_type_equity_unaffected" model="account.account.type">
+                        <field name="name">Current Year Earnings</field>
+                        <field name="value">equity_unaffected</field>
+                </record>
+
+                <record id="account_type_income" model="account.account.type">
+                        <field name="name">Income</field>
+                        <field name="value">income</field>
+                </record>
+
+                <record id="account_type_income_other" model="account.account.type">
+                        <field name="name">Other Income</field>
+                        <field name="value">income_other</field>
+                </record>
+
+                <record id="account_type_expense" model="account.account.type">
+                        <field name="name">Expenses</field>
+                        <field name="value">expense</field>
+                </record>
+
+                <record id="account_type_expense_depreciation" model="account.account.type">
+                        <field name="name">Depreciation</field>
+                        <field name="value">expense_depreciation</field>
+                </record>
+
+                <record id="account_type_expense_direct_cost" model="account.account.type">
+                        <field name="name">Cost of Revenue</field>
+                        <field name="value">expense_direct_cost</field>
+                </record>
+
+                <record id="account_type_off_balance" model="account.account.type">
+                        <field name="name">Off-Balance Sheet</field>
+                        <field name="value">off_balance</field>
+                </record>
+
                 <!-- Financial Reports data records in the model account.financial.report-->
 
                 <!-- Profit and Loss (Top-level, Account Type) -->
@@ -270,98 +361,6 @@
                         <field name="parent_id" ref="account_financial_report_financing_activity0"/>
                         <field name="display_detail">detail_with_hierarchy</field>
                         <field name="type">accounts</field>
-                </record>
-
-
-                <!-- Account Types Data -->
-                <record id="account_type_asset_receivable" model="account.account.type">
-                        <field name="name">Receivable</field>
-                        <field name="value">asset_receivable</field>
-                </record>
-
-                <record id="account_type_asset_cash" model="account.account.type">
-                        <field name="name">Bank and Cash</field>
-                        <field name="value">asset_cash</field>
-                </record>
-
-                <record id="account_type_asset_current" model="account.account.type">
-                        <field name="name">Current Assets</field>
-                        <field name="value">asset_current</field>
-                </record>
-
-                <record id="account_type_asset_non_current" model="account.account.type">
-                        <field name="name">Non-current Assets</field>
-                        <field name="value">asset_non_current</field>
-                </record>
-
-                <record id="account_type_asset_prepayments" model="account.account.type">
-                        <field name="name">Prepayments</field>
-                        <field name="value">asset_prepayments</field>
-                </record>
-
-                <record id="account_type_asset_fixed" model="account.account.type">
-                        <field name="name">Fixed Assets</field>
-                        <field name="value">asset_fixed</field>
-                </record>
-
-                <record id="account_type_liability_payable" model="account.account.type">
-                        <field name="name">Payable</field>
-                        <field name="value">liability_payable</field>
-                </record>
-
-                <record id="account_type_liability_credit_card" model="account.account.type">
-                        <field name="name">Credit Card</field>
-                        <field name="value">liability_credit_card</field>
-                </record>
-
-                <record id="account_type_liability_current" model="account.account.type">
-                        <field name="name">Current Liabilities</field>
-                        <field name="value">liability_current</field>
-                </record>
-
-                <record id="account_type_liability_non_current" model="account.account.type">
-                        <field name="name">Non-current Liabilities</field>
-                        <field name="value">liability_non_current</field>
-                </record>
-
-                <record id="account_type_equity" model="account.account.type">
-                        <field name="name">Equity</field>
-                        <field name="value">equity</field>
-                </record>
-
-                <record id="account_type_equity_unaffected" model="account.account.type">
-                        <field name="name">Current Year Earnings</field>
-                        <field name="value">equity_unaffected</field>
-                </record>
-
-                <record id="account_type_income" model="account.account.type">
-                        <field name="name">Income</field>
-                        <field name="value">income</field>
-                </record>
-
-                <record id="account_type_income_other" model="account.account.type">
-                        <field name="name">Other Income</field>
-                        <field name="value">income_other</field>
-                </record>
-
-                <record id="account_type_expense" model="account.account.type">
-                        <field name="name">Expenses</field>
-                        <field name="value">expense</field>
-                </record>
-
-                <record id="account_type_expense_depreciation" model="account.account.type">
-                        <field name="name">Depreciation</field>
-                        <field name="value">expense_depreciation</field>
-                </record>
-
-                <record id="account_type_expense_direct_cost" model="account.account.type">
-                        <field name="name">Cost of Revenue</field>
-                        <field name="value">expense_direct_cost</field>
-                </record>
-
-                <record id="account_type_off_balance" model="account.account.type">
-                        <field name="name">Off-Balance Sheet</field>
-                        <field name="value">off_balance</field>
                 </record>
 
                 <!-- Common Report View -->
