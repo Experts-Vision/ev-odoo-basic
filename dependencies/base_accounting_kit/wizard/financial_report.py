@@ -116,7 +116,7 @@ class FinancialReport(models.TransientModel):
 
         report_lines = self.get_account_lines(data['form'])
         # find the journal items of these accounts
-        # journal_items = self.find_journal_items(report_lines, data['form'])
+        journal_items = self.find_journal_items(report_lines, data['form'])
 
         def set_report_level(rec):
             """This function is used to set the level of each item.
@@ -143,7 +143,7 @@ class FinancialReport(models.TransientModel):
                 item['level'] = set_report_level(item)
         currency = self._get_currency()
         data['currency'] = currency
-        # data['journal_items'] = journal_items
+        data['journal_items'] = journal_items
         data['report_lines'] = report_lines
         # checking view type
         return self.env.ref(
@@ -403,54 +403,54 @@ class FinancialReport(models.TransientModel):
                                 key=lambda sub_line: sub_line['name'])
         return lines
 
-    # def find_journal_items(self, report_lines, form):
-    #     cr = self.env.cr
-    #     journal_items = []
-    #     for i in report_lines:
-    #         if i['type'] == 'account':
-    #             account = i['account']
-    #             if form['target_move'] == 'posted':
-    #                 search_query = ("select aml.id, am.id as j_id, "
-    #                                 "aml.account_id, aml.date, aml.name as "
-    #                                 "label, am.name, (aml.debit-aml.credit) as "
-    #                                 "balance, aml.debit, aml.credit, "
-    #                                 "aml.partner_id  from "
-    #                                 "account_move_line aml "
-    #                                 "join account_move am on (aml.move_id=am.id"
-    #                                 " and am.state=%s) where aml.account_id=%s")
-    #                 vals = [form['target_move']]
-    #             else:
-    #                 search_query = ("select aml.id, am.id as j_id, "
-    #                                 "aml.account_id, aml.date, aml.name as "
-    #                                 "label, am.name, (aml.debit-aml.credit) as "
-    #                                 "balance, aml.debit, aml.credit, "
-    #                                 "aml.partner_id from account_move_line aml"
-    #                                 " join account_move am on "
-    #                                 "(aml.move_id=am.id) where "
-    #                                 "aml.account_id=%s")
-    #                 vals = []
-    #             if form['date_from'] and form['date_to']:
-    #                 search_query += " and aml.date>=%s and aml.date<=%s"
-    #                 vals += [account, form['date_from'], form['date_to']]
-    #             elif form['date_from']:
-    #                 search_query += " and aml.date>=%s"
-    #                 vals += [account, form['date_from']]
-    #             elif form['date_to']:
-    #                 search_query += " and aml.date<=%s"
-    #                 vals += [account, form['date_to']]
-    #             else:
-    #                 vals += [account]
-    #             cr.execute(search_query, tuple(vals))
-    #             items = cr.dictfetchall()
-    #
-    #             for j in items:
-    #                 temp = j['id']
-    #                 j['id'] = re.sub('[^0-9a-zA-Z]+', '', i['name']) + str(
-    #                     temp)
-    #                 j['p_id'] = str(i['a_id'])
-    #                 j['type'] = 'journal_item'
-    #                 journal_items.append(j)
-    #     return journal_items
+    def find_journal_items(self, report_lines, form):
+        cr = self.env.cr
+        journal_items = []
+        for i in report_lines:
+            if i['type'] == 'account':
+                account = i['account']
+                if form['target_move'] == 'posted':
+                    search_query = ("select aml.id, am.id as j_id, "
+                                    "aml.account_id, aml.date, aml.name as "
+                                    "label, am.name, (aml.debit-aml.credit) as "
+                                    "balance, aml.debit, aml.credit, "
+                                    "aml.partner_id  from "
+                                    "account_move_line aml "
+                                    "join account_move am on (aml.move_id=am.id"
+                                    " and am.state=%s) where aml.account_id=%s")
+                    vals = [form['target_move']]
+                else:
+                    search_query = ("select aml.id, am.id as j_id, "
+                                    "aml.account_id, aml.date, aml.name as "
+                                    "label, am.name, (aml.debit-aml.credit) as "
+                                    "balance, aml.debit, aml.credit, "
+                                    "aml.partner_id from account_move_line aml"
+                                    " join account_move am on "
+                                    "(aml.move_id=am.id) where "
+                                    "aml.account_id=%s")
+                    vals = []
+                if form['date_from'] and form['date_to']:
+                    search_query += " and aml.date>=%s and aml.date<=%s"
+                    vals += [account, form['date_from'], form['date_to']]
+                elif form['date_from']:
+                    search_query += " and aml.date>=%s"
+                    vals += [account, form['date_from']]
+                elif form['date_to']:
+                    search_query += " and aml.date<=%s"
+                    vals += [account, form['date_to']]
+                else:
+                    vals += [account]
+                cr.execute(search_query, tuple(vals))
+                items = cr.dictfetchall()
+
+                for j in items:
+                    temp = j['id']
+                    j['id'] = re.sub('[^0-9a-zA-Z]+', '', i['name']) + str(
+                        temp)
+                    j['p_id'] = str(i['a_id'])
+                    j['type'] = 'journal_item'
+                    journal_items.append(j)
+        return journal_items
 
     @api.model
     def _get_currency(self):
@@ -485,7 +485,7 @@ class ProfitLossPdf(models.AbstractModel):
         
         ctx = {
             'data': data,
-            # 'journal_items': data['journal_items'],
+            'journal_items': data['journal_items'],
             'report_lines': data['report_lines'],
             'account_report': data['form']['account_report_id'][1],
             'currency': data['currency'],
