@@ -106,8 +106,11 @@
             'base_accounting_kit/static/src/js/KanbanController.js',
             'base_accounting_kit/static/src/js/ListController.js',
             'base_accounting_kit/static/src/js/bank_reconcile_form_lines_widget.js',
+            'base_accounting_kit/static/src/xml/financial_report.xml',
+            'base_accounting_kit/static/src/js/financial_report.js',
             'base_accounting_kit/static/src/xml/bank_rec_widget.xml',
             'base_accounting_kit/static/src/xml/bank_reconcile_widget.xml',
+            'base_accounting_kit/static/src/scss/financial_report.scss',
         ]
     },
     'license': 'LGPL-3',

@@ -1,0 +1,122 @@
+.reprot-container {
+    padding: 0 20px;
+}
+
+.modern-report-card {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 16px auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 100px;
+
+}
+.modern-report-header {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    overflow: hidden;
+}
+.modern-report-header-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+}
+.modern-report-header-table td {
+    padding: 0;
+    vertical-align: middle;
+    border: none;
+}
+.modern-report-header-table tr {
+    border: none;
+}
+.modern-report-header-table td:first-child {
+    width: 70%;
+}
+.modern-report-header-table td:last-child {
+    width: 30%;
+    text-align: right;
+}
+.modern-report-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+.modern-year-badge {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: inline-block;
+}
+.modern-report-lines {
+    margin-top: 16px;
+}
+.modern-report-line {
+    padding: 8px 0;
+    min-height: 32px;
+    overflow: hidden;
+}
+.modern-report-line-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+}
+.modern-report-line-table td {
+    padding: 8px 0;
+    vertical-align: middle;
+    border: none;
+}
+.modern-report-line-table tr {
+    border: none;
+}
+td, tr, table, tbody, thead, tfoot {
+    border: none !important;
+}
+.modern-report-line-table td:first-child {
+    width: 70%;
+}
+.modern-report-line-table td:last-child {
+    width: 30%;
+    text-align: right;
+}
+.modern-report-line-highlight {
+    background-color: #f5f5f5;
+    padding: 12px;
+    margin: 4px 0;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.modern-line-name {
+    display: block;
+}
+.modern-line-indent {
+    width: 16px;
+    display: inline-block;
+}
+.modern-line-chevron {
+    width: 16px;
+    color: #999;
+    margin-right: 8px;
+    display: inline-block;
+}
+.modern-line-content {
+    display: inline-block;
+}
+.modern-line-balance {
+    display: inline-block;
+}
+.modern-info-icon {
+    color: #999;
+    font-size: 12px;
+}
+.modern-balance-header {
+    font-weight: 500;
+    color: #666;
+    text-align: right;
+    margin: 0 16px;
+}
+.modern-report-line-bold {
+    font-weight: 600;
+}

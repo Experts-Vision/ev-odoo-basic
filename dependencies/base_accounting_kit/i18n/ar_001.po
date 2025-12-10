@@ -6,16 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-26 17:59+0000\n"
-"PO-Revision-Date: 2025-11-26 20:00+0200\n"
+"POT-Creation-Date: 2025-12-10 09:15+0000\n"
+"PO-Revision-Date: 2025-12-10 09:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
-"X-Generator: Poedit 3.8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: base_accounting_kit
 #. odoo-python
@@ -60,7 +58,8 @@ msgstr ""
 
 #. module: base_accounting_kit
 #. odoo-python
-#: code:addons/base_accounting_kit/models/account_move.py:0 code:addons/base_accounting_kit/models/sale_order.py:0
+#: code:addons/base_accounting_kit/models/account_move.py:0
+#: code:addons/base_accounting_kit/models/sale_order.py:0
 msgid "%s is in  Blocking Stage and has a due amount of %s %s to pay"
 msgstr ""
 
@@ -112,7 +111,7 @@ msgstr ": دفتر الأستاذ العام"
 #. module: base_accounting_kit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid ": Trial Balance"
-msgstr "ميزان المراجعة: "
+msgstr "ميزان المراجعة:"
 
 #. module: base_accounting_kit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.res_partner_followup_view_form
@@ -263,13 +262,6 @@ msgid "<span>Amount</span>"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial
-msgid "<span>Comp</span>"
-msgstr ""
-"<span> شركات  span&gt;\n"
-"                                </span>"
-
-#. module: base_accounting_kit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.multiple_invoice_wizard_preview
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_multiple_invoice_new
 msgid "<span>Description</span>"
@@ -364,7 +356,8 @@ msgstr ""
 "                                    </strong>"
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_tax
 msgid "<strong>Company:</strong>"
 msgstr ""
@@ -384,10 +377,13 @@ msgid "<strong>Customer Code:</strong>"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_flow
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger model_terms:ir.ui.view,arch_db:base_accounting_kit.report_tax
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_flow
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_tax
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "<strong>Date from :</strong>"
 msgstr ""
@@ -395,10 +391,13 @@ msgstr ""
 "                                </strong>"
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_tax model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_tax
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "<strong>Date to :</strong>"
 msgstr ""
 "<strong> التاريخ إلى:  strong&gt;\n"
@@ -419,7 +418,8 @@ msgstr ""
 "                            </strong>"
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 msgid "<strong>Display Account</strong>"
 msgstr ""
@@ -458,8 +458,10 @@ msgstr ""
 "                                </strong>"
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 msgid "<strong>Journals:</strong>"
 msgstr ""
 "<strong> المجلات:  strong&gt;\n"
@@ -497,7 +499,8 @@ msgid "<strong>Reference:</strong>"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 msgid "<strong>Sorted By:</strong>"
 msgstr ""
@@ -523,10 +526,13 @@ msgstr ""
 
 #. module: base_accounting_kit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_agedpartnerbalance model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_flow
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_agedpartnerbalance
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_flow
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "<strong>Target Moves:</strong>"
 msgstr ""
@@ -544,7 +550,9 @@ msgstr ""
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_res_partner__warning_stage
 #: model:ir.model.fields,help:base_accounting_kit.field_res_users__warning_stage
-msgid "A warning message will appear once the selected customer is crossed warning amount. Set its value to 0.00 to disable this feature"
+msgid ""
+"A warning message will appear once the selected customer is crossed warning "
+"amount. Set its value to 0.00 to disable this feature"
 msgstr ""
 
 #. module: base_accounting_kit
@@ -555,10 +563,12 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-javascript
 #. odoo-python
-#: code:addons/base_accounting_kit/static/src/js/bank_reconcile_form_lines_widget.js:0 code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/static/src/js/bank_reconcile_form_lines_widget.js:0
+#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
 #: model:ir.model,name:base_accounting_kit.model_account_account
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_bank_statement_line__account_id
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_bank_reconcile_widget_form
 msgid "Account"
 msgstr "الحساب "
@@ -622,7 +632,8 @@ msgstr "متابعة الحساب"
 #: model:ir.model.fields,field_description:base_accounting_kit.field_cash_flow_report__filter_hierarchy
 #: model:ir.model.fields,field_description:base_accounting_kit.field_financial_report__filter_hierarchy
 #: model:ir.model.fields,field_description:base_accounting_kit.field_kit_account_tax_report__filter_hierarchy
-#: model:ir.ui.menu,name:base_accounting_kit.menu_account_group model_terms:ir.ui.view,arch_db:base_accounting_kit.account_group_view_form
+#: model:ir.ui.menu,name:base_accounting_kit.menu_account_group
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_group_view_form
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_group_view_tree
 msgid "Account Groups"
 msgstr ""
@@ -670,11 +681,17 @@ msgid "Account Type"
 msgstr "نوع الحساب"
 
 #. module: base_accounting_kit
+#: model:ir.model.fields,field_description:base_accounting_kit.field_account_account_type__value
+msgid "Account Type Value"
+msgstr ""
+
+#. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_aged_trial_balance__filter_account_type
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_balance_report__filter_account_type
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_common_account_report__filter_account_type
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_common_journal_report__filter_account_type
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_common_partner_report__filter_account_type
+#: model:ir.model.fields,field_description:base_accounting_kit.field_account_financial_report__account_type_ids_many2many
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_print_journal__filter_account_type
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_report_general_ledger__filter_account_type
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_report_partner_ledger__filter_account_type
@@ -697,12 +714,15 @@ msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_asset_category__account_depreciation_expense_id
-msgid "Account used in the periodical entries, to record a part of the asset as expense."
+msgid ""
+"Account used in the periodical entries, to record a part of the asset as "
+"expense."
 msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_asset_category__account_asset_id
-msgid "Account used to record the purchase of the asset at its original price."
+msgid ""
+"Account used to record the purchase of the asset at its original price."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -796,7 +816,8 @@ msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.actions.act_window,name:base_accounting_kit.action_account_aged_balance_view
-#: model:ir.actions.report,name:base_accounting_kit.action_report_aged_partner_balance model:ir.ui.menu,name:base_accounting_kit.menu_aged_trial_balance
+#: model:ir.actions.report,name:base_accounting_kit.action_report_aged_partner_balance
+#: model:ir.ui.menu,name:base_accounting_kit.menu_aged_trial_balance
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_agedpartnerbalance
 msgid "Aged Partner Balance"
 msgstr "رصيد الشريك المسن"
@@ -832,6 +853,7 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_aged_trial_balance__target_move__all
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_balance_report__target_move__all
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_bank_book_report__target_move__all
@@ -848,10 +870,13 @@ msgstr ""
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__financial_report__target_move__all
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__kit_account_tax_report__target_move__all
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_agedpartnerbalance model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_flow
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_agedpartnerbalance
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_flow
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 msgid "All Entries"
 msgstr "كل المقالات"
 
@@ -865,6 +890,7 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_aged_trial_balance__target_move__posted
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_balance_report__target_move__posted
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_bank_book_report__target_move__posted
@@ -881,21 +907,25 @@ msgstr ""
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__financial_report__target_move__posted
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__kit_account_tax_report__target_move__posted
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_agedpartnerbalance model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_flow model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_agedpartnerbalance
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_flow
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 msgid "All Posted Entries"
 msgstr "جميع المشاركات المنشورة"
 
 #. module: base_accounting_kit
 #. odoo-python
-#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0 model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
+#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "All accounts"
 msgstr "جميع الحسابات"
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 msgid "All accounts'"
 msgstr "جميع الحسابات"
@@ -986,7 +1016,8 @@ msgstr "حساب الأصول"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_move_line__asset_category_id
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.asset_asset_report_view_search model_terms:ir.ui.view,arch_db:base_accounting_kit.view_move_form
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.asset_asset_report_view_search
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_move_form
 msgid "Asset Category"
 msgstr "فئة الأصول"
 
@@ -1075,7 +1106,8 @@ msgid "Assets"
 msgstr "الأصول"
 
 #. module: base_accounting_kit
-#: model:ir.actions.act_window,name:base_accounting_kit.action_asset_asset_report model:ir.model,name:base_accounting_kit.model_asset_asset_report
+#: model:ir.actions.act_window,name:base_accounting_kit.action_asset_asset_report
+#: model:ir.model,name:base_accounting_kit.model_asset_asset_report
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.asset_asset_report_view_graph
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.asset_asset_report_view_pivot
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.asset_asset_report_view_search
@@ -1150,11 +1182,18 @@ msgid "Availability"
 msgstr ""
 
 #. module: base_accounting_kit
+#. odoo-javascript
 #. odoo-python
-#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0 model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
+#: code:addons/base_accounting_kit/static/src/xml/financial_report.xml:0
+#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "Balance"
 msgstr "الرصيد"
 
@@ -1163,7 +1202,7 @@ msgstr "الرصيد"
 #: model:ir.actions.act_window,name:base_accounting_kit.action_balance_sheet_report
 #: model:ir.ui.menu,name:base_accounting_kit._account_financial_reports_balance_sheet
 msgid "Balance Sheet"
-msgstr "ورقة التوازن"
+msgstr "الميزانية العمومية"
 
 #. module: base_accounting_kit
 #: model:ir.ui.menu,name:base_accounting_kit.account_bank_book_menu
@@ -1201,6 +1240,7 @@ msgid "Bank Statement Line"
 msgstr "بند كشف الحساب البنكي"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_asset_cash
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_cash
 msgid "Bank and Cash"
 msgstr ""
@@ -1268,7 +1308,9 @@ msgstr "فاتورة ملغاة"
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_res_partner__blocking_stage
 #: model:ir.model.fields,help:base_accounting_kit.field_res_users__blocking_stage
-msgid "Cannot make sales once the selected customer is crossed blocking amount.Set its value to 0.00 to disable this feature"
+msgid ""
+"Cannot make sales once the selected customer is crossed blocking amount.Set "
+"its value to 0.00 to disable this feature"
 msgstr ""
 
 #. module: base_accounting_kit
@@ -1294,10 +1336,11 @@ msgstr "تقرير التدفق النقدي"
 
 #. module: base_accounting_kit
 #: model:account.financial.report,name:base_accounting_kit.account_financial_report_cash_flow0
-#: model:ir.actions.act_window,name:base_accounting_kit.action_cash_flow_report model:ir.actions.report,name:base_accounting_kit.action_report_cash_flow
+#: model:ir.actions.act_window,name:base_accounting_kit.action_cash_flow_report
+#: model:ir.actions.report,name:base_accounting_kit.action_report_cash_flow
 #: model:ir.ui.menu,name:base_accounting_kit.menu_account_cash_flow_report
 msgid "Cash Flow Statement"
-msgstr "بيان التدفقات النقدية"
+msgstr "كشف التدفقات النقدية"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_account__cash_flow_type
@@ -1306,6 +1349,7 @@ msgstr "نوع التدفق النقدي"
 
 #. module: base_accounting_kit
 #: model:account.financial.report,name:base_accounting_kit.cash_in_financial0
+#: model:account.financial.report,name:base_accounting_kit.cash_in_financing0
 #: model:account.financial.report,name:base_accounting_kit.cash_in_from_operation0
 #: model:account.financial.report,name:base_accounting_kit.cash_in_investing0
 msgid "Cash In"
@@ -1313,7 +1357,10 @@ msgstr "التدفقات النقدية الداخلة"
 
 #. module: base_accounting_kit
 #: model:account.financial.report,name:base_accounting_kit.cash_out_financial1
+#: model:account.financial.report,name:base_accounting_kit.cash_out_financing0
+#: model:account.financial.report,name:base_accounting_kit.cash_out_investing0
 #: model:account.financial.report,name:base_accounting_kit.cash_out_investing1
+#: model:account.financial.report,name:base_accounting_kit.cash_out_operation0
 #: model:account.financial.report,name:base_accounting_kit.cash_out_operation1
 msgid "Cash Out"
 msgstr "المصروفات"
@@ -1358,13 +1405,16 @@ msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_asset_category__open_asset
-msgid "Check this if you want to automatically confirm the assets of this category when created by invoices."
+msgid ""
+"Check this if you want to automatically confirm the assets of this category "
+"when created by invoices."
 msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_asset_category__group_entries
 msgid "Check this if you want to group the generated entries by categories."
-msgstr "حدد هذا الخيار إذا كنت تريد تجميع الإدخالات التي تم إنشاؤها حسب الفئات."
+msgstr ""
+"حدد هذا الخيار إذا كنت تريد تجميع الإدخالات التي تم إنشاؤها حسب الفئات."
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_payment__cheque_reference
@@ -1403,7 +1453,9 @@ msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_asset_depreciation_confirmation__date
-msgid "Choose the period for which you want to automatically post the depreciation lines of running assets"
+msgid ""
+"Choose the period for which you want to automatically post the depreciation "
+"lines of running assets"
 msgstr ""
 
 #. module: base_accounting_kit
@@ -1424,7 +1476,8 @@ msgstr ""
 
 #. module: base_accounting_kit
 #. odoo-python
-#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0 model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
+#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "Code"
 msgstr "الشفرة"
 
@@ -1496,6 +1549,12 @@ msgid "Comparison"
 msgstr "مقارنة"
 
 #. module: base_accounting_kit
+#. odoo-python
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
+msgid "Comparison Balance"
+msgstr ""
+
+#. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_aged_trial_balance__use_sections
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_balance_report__use_sections
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_common_account_report__use_sections
@@ -1552,6 +1611,7 @@ msgid "Contact"
 msgstr "جهة الاتصال"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_expense_direct_cost
 #: model:account.financial.report,name:base_accounting_kit.financial_report_cost_of_revenue
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__expense_direct_cost
 msgid "Cost of Revenue"
@@ -1589,7 +1649,9 @@ msgstr ""
 #: model:ir.model.fields,help:base_accounting_kit.field_cash_flow_report__use_sections
 #: model:ir.model.fields,help:base_accounting_kit.field_financial_report__use_sections
 #: model:ir.model.fields,help:base_accounting_kit.field_kit_account_tax_report__use_sections
-msgid "Create a structured report with multiple sections for convenient navigation and simultaneous printing."
+msgid ""
+"Create a structured report with multiple sections for convenient navigation "
+"and simultaneous printing."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -1673,11 +1735,16 @@ msgstr "أنشئ في"
 #. module: base_accounting_kit
 #. odoo-javascript
 #. odoo-python
-#: code:addons/base_accounting_kit/static/src/js/bank_reconcile_form_lines_widget.js:0 code:addons/base_accounting_kit/wizard/account_balance_report.py:0
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
+#: code:addons/base_accounting_kit/static/src/js/bank_reconcile_form_lines_widget.js:0
+#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "Credit"
 msgstr "دائن"
 
@@ -1687,6 +1754,7 @@ msgid "Credit Account"
 msgstr "حساب الائتمان"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_liability_credit_card
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__liability_credit_card
 msgid "Credit Card"
 msgstr ""
@@ -1720,9 +1788,12 @@ msgstr "الاهلاك التراكمي"
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_asset_asset__currency_id
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_asset_category__currency_id
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_bank_statement_line__company_currency_id
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 msgid "Currency"
 msgstr "عملة"
 
@@ -1747,6 +1818,8 @@ msgid "Current"
 msgstr ""
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_asset_current
+#: model:account.financial.report,name:base_accounting_kit.account_financial_report_current_assets0
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_current
 msgid "Current Assets"
 msgstr ""
@@ -1757,11 +1830,14 @@ msgid "Current Depreciation"
 msgstr "الإهلاك الحالي"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_liability_current
+#: model:account.financial.report,name:base_accounting_kit.account_financial_report_current_liabilities0
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__liability_current
 msgid "Current Liabilities"
 msgstr ""
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_equity_unaffected
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__equity_unaffected
 msgid "Current Year Earnings"
 msgstr ""
@@ -1788,9 +1864,12 @@ msgstr "التقارير اليومية"
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_report_general_ledger__sortby__sort_date
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__cash_flow_report__filter_cmp__filter_date
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_bank_statement_line_view_search
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 msgid "Date"
 msgstr "التاريخ"
 
@@ -1822,6 +1901,7 @@ msgstr "تاريخ البدء"
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 msgid "Date from:"
 msgstr ""
 
@@ -1843,11 +1923,13 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 msgid "Date to:"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.cash_flow_report_view model_terms:ir.ui.view,arch_db:base_accounting_kit.financial_report_view_form
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.cash_flow_report_view
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.financial_report_view_form
 msgid "Dates"
 msgstr "تواريخ"
 
@@ -1875,11 +1957,16 @@ msgstr "أيام"
 #. module: base_accounting_kit
 #. odoo-javascript
 #. odoo-python
-#: code:addons/base_accounting_kit/static/src/js/bank_reconcile_form_lines_widget.js:0 code:addons/base_accounting_kit/wizard/account_balance_report.py:0
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
+#: code:addons/base_accounting_kit/static/src/js/bank_reconcile_form_lines_widget.js:0
+#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "Debit"
 msgstr "مدين"
 
@@ -1943,6 +2030,8 @@ msgid "Deposits"
 msgstr ""
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_expense_depreciation
+#: model:account.financial.report,name:base_accounting_kit.account_financial_report_depreciation0
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__expense_depreciation
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_asset_asset_view_form
 msgid "Depreciation"
@@ -2232,12 +2321,16 @@ msgid "Entries Sorted by"
 msgstr "قيود يوميه مصنفة حسب"
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 msgid "Entry Label"
 msgstr "بطاقة الدخول"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_equity
+#: model:account.financial.report,name:base_accounting_kit.account_financial_report_equity0
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__equity
 msgid "Equity"
 msgstr ""
@@ -2253,6 +2346,7 @@ msgid "Expense Account"
 msgstr "إدخالات الإهلاك: حساب المصاريف"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_expense
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__expense
 msgid "Expenses"
 msgstr ""
@@ -2335,11 +2429,13 @@ msgid "Financial reports"
 msgstr "تقارير مالية"
 
 #. module: base_accounting_kit
+#: model:account.financial.report,name:base_accounting_kit.account_financial_report_financing_activity0
 #: model:account.financial.report,name:base_accounting_kit.account_financial_report_financing_activity1
 msgid "Financing Activities"
 msgstr "أنشطة التمويل"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_asset_fixed
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_fixed
 msgid "Fixed Assets"
 msgstr ""
@@ -2383,7 +2479,8 @@ msgid "Follow-up Reports Tree View"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.followup_line_view_form model_terms:ir.ui.view,arch_db:base_accounting_kit.followup_line_view_tree
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.followup_line_view_form
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.followup_line_view_tree
 msgid "Follow-up Steps"
 msgstr ""
 
@@ -2418,9 +2515,11 @@ msgstr ""
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_financial_report__sign
 msgid ""
-"For accounts that are typically more debited than credited and that you would like to print as negative amounts in your reports, you should reverse "
-"the sign of the balance; e.g.: Expense account. The same applies for accounts that are typically more credited than debited and that you would like to "
-"print as positive amounts in your reports; e.g.: Income account."
+"For accounts that are typically more debited than credited and that you "
+"would like to print as negative amounts in your reports, you should reverse "
+"the sign of the balance; e.g.: Expense account. The same applies for "
+"accounts that are typically more credited than debited and that you would "
+"like to print as positive amounts in your reports; e.g.: Income account."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -2443,11 +2542,16 @@ msgstr ""
 
 #. module: base_accounting_kit
 #. odoo-python
-#: code:addons/base_accounting_kit/report/account_bank_book.py:0 code:addons/base_accounting_kit/report/account_cash_book.py:0
-#: code:addons/base_accounting_kit/report/account_day_book.py:0 code:addons/base_accounting_kit/report/cash_flow_report.py:0
-#: code:addons/base_accounting_kit/report/general_ledger_report.py:0 code:addons/base_accounting_kit/report/report_aged_partner.py:0
-#: code:addons/base_accounting_kit/report/report_journal_audit.py:0 code:addons/base_accounting_kit/report/report_partner_ledger.py:0
-#: code:addons/base_accounting_kit/report/report_tax.py:0 code:addons/base_accounting_kit/report/report_trial_balance.py:0
+#: code:addons/base_accounting_kit/report/account_bank_book.py:0
+#: code:addons/base_accounting_kit/report/account_cash_book.py:0
+#: code:addons/base_accounting_kit/report/account_day_book.py:0
+#: code:addons/base_accounting_kit/report/cash_flow_report.py:0
+#: code:addons/base_accounting_kit/report/general_ledger_report.py:0
+#: code:addons/base_accounting_kit/report/report_aged_partner.py:0
+#: code:addons/base_accounting_kit/report/report_journal_audit.py:0
+#: code:addons/base_accounting_kit/report/report_partner_ledger.py:0
+#: code:addons/base_accounting_kit/report/report_tax.py:0
+#: code:addons/base_accounting_kit/report/report_trial_balance.py:0
 msgid "Form content is missing, this report cannot be printed."
 msgstr ""
 
@@ -2653,7 +2757,9 @@ msgstr "الأيقونة للإشارة إلى النشاط المستثنى. "
 #: model:ir.model.fields,help:base_accounting_kit.field_cash_flow_report__filter_aml_ir_filters
 #: model:ir.model.fields,help:base_accounting_kit.field_financial_report__filter_aml_ir_filters
 #: model:ir.model.fields,help:base_accounting_kit.field_kit_account_tax_report__filter_aml_ir_filters
-msgid "If activated, user-defined filters on journal items can be selected on this report"
+msgid ""
+"If activated, user-defined filters on journal items can be selected on this "
+"report"
 msgstr ""
 
 #. module: base_accounting_kit
@@ -2674,7 +2780,8 @@ msgstr "إذا تم تحديده ، فإن بعض الرسائل بها خطأ �
 #: model:ir.model.fields,help:base_accounting_kit.field_account_bank_statement_line__to_check
 #: model:ir.model.fields,help:base_accounting_kit.field_account_move__to_check
 msgid ""
-"If this checkbox is ticked, it means that the user was not sure of all the related information at the time of the creation of the move and that the "
+"If this checkbox is ticked, it means that the user was not sure of all the "
+"related information at the time of the creation of the move and that the "
 "move needs to be checked again."
 msgstr ""
 
@@ -2682,7 +2789,9 @@ msgstr ""
 #: model:ir.model.fields,help:base_accounting_kit.field_account_bank_book_report__initial_balance
 #: model:ir.model.fields,help:base_accounting_kit.field_account_cash_book_report__initial_balance
 #: model:ir.model.fields,help:base_accounting_kit.field_account_report_general_ledger__initial_balance
-msgid "If you selected date, this field allow you to add a row to display the amount of debit/credit/balance that precedes the filter you've set."
+msgid ""
+"If you selected date, this field allow you to add a row to display the "
+"amount of debit/credit/balance that precedes the filter you've set."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -2709,7 +2818,9 @@ msgstr "بحاجة للعمل"
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/models/account_payment.py:0
-msgid "In order to print multiple checks at once, they must belong to the same bank journal."
+msgid ""
+"In order to print multiple checks at once, they must belong to the same bank"
+" journal."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -2720,6 +2831,7 @@ msgid "Include Initial Balances"
 msgstr "قم بتضمين الأرصدة الأولية"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_income
 #: model:account.financial.report,name:base_accounting_kit.account_financial_report_income0
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__income
 msgid "Income"
@@ -2728,13 +2840,22 @@ msgstr "الإيرادات"
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_asset_asset__prorata
 msgid ""
-"Indicates that the first depreciation entry for this asset have to be done from the purchase date instead of the first January / Start date of fiscal "
+"Indicates that the first depreciation entry for this asset have to be done "
+"from the purchase date instead of the first January / Start date of fiscal "
 "year"
 msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_asset_category__prorata
-msgid "Indicates that the first depreciation entry for this asset have to be done from the purchase date instead of the first of January"
+msgid ""
+"Indicates that the first depreciation entry for this asset have to be done "
+"from the purchase date instead of the first of January"
+msgstr ""
+
+#. module: base_accounting_kit
+#. odoo-python
+#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+msgid "Initial Balance"
 msgstr ""
 
 #. module: base_accounting_kit
@@ -2765,7 +2886,8 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/import_bank_statement.py:0
-msgid "Invalid row format in CSV file. Ensure all required columns are present."
+msgid ""
+"Invalid row format in CSV file. Ensure all required columns are present."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -2807,7 +2929,9 @@ msgstr "هو تحذير"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_report_partner_ledger__amount_currency
-msgid "It adds the currency column on report if the currency differs from the company currency."
+msgid ""
+"It adds the currency column on report if the currency differs from the "
+"company currency."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -2831,8 +2955,10 @@ msgid "Items"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 msgid "JRNL"
 msgstr ""
@@ -2861,12 +2987,14 @@ msgstr ""
 
 #. module: base_accounting_kit
 #. odoo-python
-#: code:addons/base_accounting_kit/models/account_asset_asset.py:0 model_terms:ir.ui.view,arch_db:base_accounting_kit.account_asset_category_view_form
+#: code:addons/base_accounting_kit/models/account_asset_asset.py:0
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_asset_category_view_form
 msgid "Journal Entries"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model:ir.model,name:base_accounting_kit.model_account_move model_terms:ir.ui.view,arch_db:base_accounting_kit.account_bank_statement_line_view_search
+#: model:ir.model,name:base_accounting_kit.model_account_move
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_bank_statement_line_view_search
 msgid "Journal Entry"
 msgstr "قيد اليومية"
 
@@ -2892,7 +3020,8 @@ msgid "Journal Report"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 msgid "Journal and Partner"
 msgstr "مجلة وشريك"
@@ -2934,7 +3063,8 @@ msgstr "دفاتر اليومية"
 
 #. module: base_accounting_kit
 #: model:ir.actions.act_window,name:base_accounting_kit.action_account_print_journal_menu
-#: model:ir.actions.report,name:base_accounting_kit.action_report_journal model:ir.ui.menu,name:base_accounting_kit.menu_print_journal
+#: model:ir.actions.report,name:base_accounting_kit.action_report_journal
+#: model:ir.ui.menu,name:base_accounting_kit.menu_print_journal
 msgid "Journals Audit"
 msgstr "تدقيق المجلات"
 
@@ -3032,8 +3162,12 @@ msgid "Level"
 msgstr "مستوى"
 
 #. module: base_accounting_kit
+#: model:account.financial.report,name:base_accounting_kit.account_financial_report_liabilities_equity0
+msgid "Liabilities + Equity"
+msgstr ""
+
+#. module: base_accounting_kit
 #: model:account.financial.report,name:base_accounting_kit.account_financial_report_liability0
-#: model:account.financial.report,name:base_accounting_kit.account_financial_report_liabilitysum0
 msgid "Liability"
 msgstr "مسؤولية"
 
@@ -3114,8 +3248,10 @@ msgid "Lock your Fiscal Period"
 msgstr "قفل الفترة المالية الخاصة بك"
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.bold model_terms:ir.ui.view,arch_db:base_accounting_kit.boxed
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.standard model_terms:ir.ui.view,arch_db:base_accounting_kit.striped
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.bold
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.boxed
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.standard
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.striped
 msgid "Logo"
 msgstr ""
 
@@ -3167,7 +3303,8 @@ msgid "Modify"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model:ir.actions.act_window,name:base_accounting_kit.action_asset_modify model:ir.model,name:base_accounting_kit.model_asset_modify
+#: model:ir.actions.act_window,name:base_accounting_kit.action_asset_modify
+#: model:ir.model,name:base_accounting_kit.model_asset_modify
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.asset_modify_view_form
 msgid "Modify Asset"
 msgstr "تعديل الأصل"
@@ -3198,8 +3335,10 @@ msgid "Months"
 msgstr "الشهور"
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
 msgid "Move"
 msgstr "نقل"
@@ -3242,12 +3381,14 @@ msgid "My Activity Deadline"
 msgstr "الموعد النهائي لنشاطاتي "
 
 #. module: base_accounting_kit
+#. odoo-python
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_common_account_report__name
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_common_journal_report__name
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_common_partner_report__name
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_recurring_entries_line__template_name
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_recurring_payments__name
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
 msgid "Name"
 msgstr "اسم"
 
@@ -3332,15 +3473,29 @@ msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_lock_date__hard_lock_date
-msgid "No users, including Advisers, can edit accounts prior to and inclusive of this date. Use it for fiscal year locking for example."
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date. Use it for fiscal year locking for example."
 msgstr ""
 
 #. module: base_accounting_kit
+#: model:account.financial.report,name:base_accounting_kit.account_financial_report_non_current_assets0
+msgid "Non Current Assets"
+msgstr ""
+
+#. module: base_accounting_kit
+#: model:account.financial.report,name:base_accounting_kit.account_financial_report_non_current_liabilities0
+msgid "Non Current Liabilities"
+msgstr ""
+
+#. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_asset_non_current
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_non_current
 msgid "Non-current Assets"
 msgstr ""
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_liability_non_current
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__liability_non_current
 msgid "Non-current Liabilities"
 msgstr ""
@@ -3415,6 +3570,7 @@ msgid "Number of messages with delivery error"
 msgstr "عدد الرسائل التي بها خطأفي  التسليم"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_off_balance
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__off_balance
 msgid "Off-Balance Sheet"
 msgstr ""
@@ -3460,6 +3616,7 @@ msgid "Operations"
 msgstr "عمليات"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_income_other
 #: model:account.financial.report,name:base_accounting_kit.account_financial_report_other_income0
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__income_other
 msgid "Other Income"
@@ -3482,7 +3639,8 @@ msgid "PDC"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.boxed model_terms:ir.ui.view,arch_db:base_accounting_kit.standard
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.boxed
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.standard
 msgid ""
 "Page:\n"
 "                    <span class=\"page\"/>\n"
@@ -3523,8 +3681,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_recurring_payments__partner_id
 #: model:ir.model.fields,field_description:base_accounting_kit.field_asset_asset_report__partner_id
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_bank_statement_line_view_tree
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_journal_audit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_bank_reconcile_widget_form
 msgid "Partner"
@@ -3532,10 +3692,11 @@ msgstr "شريك"
 
 #. module: base_accounting_kit
 #: model:ir.actions.act_window,name:base_accounting_kit.action_partner_leadger
-#: model:ir.actions.report,name:base_accounting_kit.action_report_partnerledger model:ir.ui.menu,name:base_accounting_kit.menu_partner_ledger
+#: model:ir.actions.report,name:base_accounting_kit.action_report_partnerledger
+#: model:ir.ui.menu,name:base_accounting_kit.menu_partner_ledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 msgid "Partner Ledger"
-msgstr "شريك ليدجر"
+msgstr "دفتر الأستاذ العام للشركاء"
 
 #. module: base_accounting_kit
 #: model:ir.model,name:base_accounting_kit.model_report_base_accounting_kit_report_partnerledger
@@ -3604,6 +3765,7 @@ msgid "Pay Time"
 msgstr "وقت الدفع"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_liability_payable
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_account_type__type__payable
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__liability_payable
 msgid "Payable"
@@ -3642,7 +3804,9 @@ msgstr "الدفعات"
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/models/account_payment.py:0
-msgid "Payments to print as a checks must have 'Check' or 'PDC' selected as payment method and not have already been reconciled"
+msgid ""
+"Payments to print as a checks must have 'Check' or 'PDC' selected as payment"
+" method and not have already been reconciled"
 msgstr ""
 
 #. module: base_accounting_kit
@@ -3685,6 +3849,7 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 msgid "Please install openpyxl library to export Excel files."
 msgstr ""
 
@@ -3744,6 +3909,7 @@ msgid "Prefix Groups Threshold"
 msgstr ""
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_asset_prepayments
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_prepayments
 msgid "Prepayments"
 msgstr ""
@@ -3774,6 +3940,8 @@ msgid "Price"
 msgstr ""
 
 #. module: base_accounting_kit
+#. odoo-javascript
+#: code:addons/base_accounting_kit/static/src/xml/financial_report.xml:0
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_aged_trial_balance_view_form
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_bank_book_report_view_form
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_cash_book_report_view_form
@@ -3792,8 +3960,12 @@ msgstr ""
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_common_journal_report__amount_currency
 #: model:ir.model.fields,help:base_accounting_kit.field_account_print_journal__amount_currency
-msgid "Print Report with the currency column if the currency differs from the company currency."
-msgstr "طباعة التقرير مع خانة العملة اذا كانت العملة تختلف عن العملة الافتراضية للمؤسسة."
+msgid ""
+"Print Report with the currency column if the currency differs from the "
+"company currency."
+msgstr ""
+"طباعة التقرير مع خانة العملة اذا كانت العملة تختلف عن العملة الافتراضية "
+"للمؤسسة."
 
 #. module: base_accounting_kit
 #: model:ir.model,name:base_accounting_kit.model_product_template
@@ -3821,7 +3993,9 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/models/account_asset_asset.py:0
-msgid "Prorata temporis can be applied only for time method \"number of depreciations\"."
+msgid ""
+"Prorata temporis can be applied only for time method \"number of "
+"depreciations\"."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -3850,6 +4024,7 @@ msgid "Reason"
 msgstr "السبب"
 
 #. module: base_accounting_kit
+#: model:account.account.type,name:base_accounting_kit.account_type_asset_receivable
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_account_type__type__receivable
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__account_type_ids__asset_receivable
 msgid "Receivable"
@@ -3935,8 +4110,10 @@ msgid "Recurring Templates"
 msgstr "القوالب المتكررة"
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 msgid "Ref"
 msgstr ""
@@ -4288,8 +4465,9 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 msgid "TOTAL"
-msgstr ""
+msgstr "الإجمالي"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_aged_trial_balance__target_move
@@ -4313,8 +4491,9 @@ msgstr "تحركات الهدف"
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 msgid "Target Moves:"
-msgstr ""
+msgstr "الحركات المستهدفة"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_bank_statement_line__tax_ids
@@ -4338,10 +4517,12 @@ msgid "Tax ID"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model:ir.actions.report,name:base_accounting_kit.action_report_account_tax model:ir.model,name:base_accounting_kit.model_kit_account_tax_report
+#: model:ir.actions.report,name:base_accounting_kit.action_report_account_tax
+#: model:ir.model,name:base_accounting_kit.model_kit_account_tax_report
 #: model:ir.model,name:base_accounting_kit.model_report_base_accounting_kit_report_tax
 #: model:ir.model.fields,field_description:base_accounting_kit.field_kit_account_tax_report__name
-#: model:ir.ui.menu,name:base_accounting_kit.menu_tax_report model_terms:ir.ui.view,arch_db:base_accounting_kit.report_tax
+#: model:ir.ui.menu,name:base_accounting_kit.menu_tax_report
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_tax
 msgid "Tax Report"
 msgstr "تقرير الضرائب"
 
@@ -4381,8 +4562,9 @@ msgstr ""
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_account_type__type
 msgid ""
-"The 'Internal Type' is used for features available on different types of accounts: liquidity type is for cash or bank accounts, payable/receivable is "
-"for vendor/customer accounts."
+"The 'Internal Type' is used for features available on different types of "
+"accounts: liquidity type is for cash or bank accounts, payable/receivable is"
+" for vendor/customer accounts."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -4393,7 +4575,8 @@ msgstr "مقدار الوقت بين عمليتي إهلاك بالأشهر"
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_followup_line__delay
 msgid ""
-"The number of days after the due date of the invoice to wait before sending the reminder.  Could be negative if you want to send a polite alert "
+"The number of days after the due date of the invoice to wait before sending "
+"the reminder.  Could be negative if you want to send a polite alert "
 "beforehand."
 msgstr ""
 
@@ -4410,7 +4593,9 @@ msgstr "عدد الإهلاكات اللازمة لخفض قيمة الأصول 
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/models/account_move_line.py:0
-msgid "The number of depreciations or the period length of your asset category cannot be null."
+msgid ""
+"The number of depreciations or the period length of your asset category "
+"cannot be null."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -4431,13 +4616,17 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/models/res_company.py:0
-msgid "There are still unposted entries in the period you want to lock. You should either post or delete them."
+msgid ""
+"There are still unposted entries in the period you want to lock. You should "
+"either post or delete them."
 msgstr ""
 
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/models/res_company.py:0
-msgid "There are still unreconciled bank statement lines in the period you want to lock.You should either reconcile or delete them."
+msgid ""
+"There are still unreconciled bank statement lines in the period you want to "
+"lock.You should either reconcile or delete them."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -4448,7 +4637,9 @@ msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_financial_report__account_type_ids
-msgid "These types are defined according to your country. The type contains more information about the account and its specificities."
+msgid ""
+"These types are defined according to your country. The type contains more "
+"information about the account and its specificities."
 msgstr ""
 
 #. module: base_accounting_kit
@@ -4457,31 +4648,38 @@ msgid "Thirty one dollar and Five cents"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_move_form model_terms:ir.ui.view,arch_db:base_accounting_kit.view_order_form
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_move_form
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_order_form
 msgid "This Customer's due amount is"
 msgstr ""
 
 #. module: base_accounting_kit
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_move_form model_terms:ir.ui.view,arch_db:base_accounting_kit.view_order_form
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_move_form
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_order_form
 msgid "This customer's <strong>warning limit</strong> has been crossed."
 msgstr ""
 
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/models/account_asset_depreciation_line.py:0
-msgid "This depreciation is already linked to a journal entry! Please post or delete it."
+msgid ""
+"This depreciation is already linked to a journal entry! Please post or "
+"delete it."
 msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_cash_flow_report__label_filter
-msgid "This label will be displayed on report to show the balance computed for the given comparison filter."
+msgid ""
+"This label will be displayed on report to show the balance computed for the "
+"given comparison filter."
 msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_cash_flow_report__debit_credit
 #: model:ir.model.fields,help:base_accounting_kit.field_financial_report__debit_credit
 msgid ""
-"This option allows you to get more details about the way your balances are computed. Because it is space consuming, we do not allow to use it while "
+"This option allows you to get more details about the way your balances are "
+"computed. Because it is space consuming, we do not allow to use it while "
 "doing a comparison."
 msgstr ""
 
@@ -4582,7 +4780,8 @@ msgstr ""
 
 #. module: base_accounting_kit
 #. odoo-python
-#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0 model:ir.actions.act_window,name:base_accounting_kit.action_account_balance_menu
+#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: model:ir.actions.act_window,name:base_accounting_kit.action_account_balance_menu
 #: model:ir.actions.report,name:base_accounting_kit.action_report_trial_balance
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_balance_report__name
 #: model:ir.ui.menu,name:base_accounting_kit.menu_Balance_report
@@ -4780,8 +4979,10 @@ msgstr "مع رصيد لا يساوي 0"
 
 #. module: base_accounting_kit
 #. odoo-python
-#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0 model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "With balance not equal to zero"
 msgstr "مع رصيد لا يساوي الصفر"
@@ -4794,8 +4995,10 @@ msgstr "مع رصيد لا يساوي الصفر"
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_cash_book_report__display_account__movement
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_common_account_report__display_account__movement
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_report_general_ledger__display_account__movement
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
 msgid "With movements"
 msgstr "مع الحركات"
 
@@ -4806,13 +5009,20 @@ msgstr "مع الفواتير المتأخرة"
 
 #. module: base_accounting_kit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.res_partner_followup_view_form
-msgid "Wonder how to Send Followup mails and Print Followup Reports ? Download our"
+msgid ""
+"Wonder how to Send Followup mails and Print Followup Reports ? Download our"
 msgstr ""
 
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/import_bank_statement.py:0
 msgid "Wrong file format"
+msgstr ""
+
+#. module: base_accounting_kit
+#. odoo-javascript
+#: code:addons/base_accounting_kit/static/src/xml/financial_report.xml:0
+msgid "Xlsx"
 msgstr ""
 
 #. module: base_accounting_kit
@@ -4834,7 +5044,8 @@ msgstr ""
 #. module: base_accounting_kit
 #: model:ir.model.fields,help:base_accounting_kit.field_account_financial_report__style_overwrite
 msgid ""
-"You can set up here the format you want this record to be displayed. If you leave the automatic formatting, it will be computed based on the financial "
+"You can set up here the format you want this record to be displayed. If you "
+"leave the automatic formatting, it will be computed based on the financial "
 "reports hierarchy (auto-computed field 'level')."
 msgstr ""
 
@@ -4864,7 +5075,8 @@ msgstr ""
 
 #. module: base_accounting_kit
 #. odoo-python
-#: code:addons/base_accounting_kit/wizard/account_bank_book_report.py:0 code:addons/base_accounting_kit/wizard/account_cash_book_report.py:0
+#: code:addons/base_accounting_kit/wizard/account_bank_book_report.py:0
+#: code:addons/base_accounting_kit/wizard/account_cash_book_report.py:0
 msgid "You must choose a Start Date"
 msgstr ""
 

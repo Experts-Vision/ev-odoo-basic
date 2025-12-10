@@ -20,7 +20,17 @@
 #
 #############################################################################
 import re
+import io
+import base64
+from datetime import datetime
 from odoo import api, models, fields
+from odoo.exceptions import UserError
+try:
+    import openpyxl
+    from openpyxl.styles import Font, Alignment, PatternFill
+    from openpyxl.utils import get_column_letter
+except ImportError:
+    openpyxl = None
 
 
 class FinancialReport(models.TransientModel):
@@ -146,9 +156,295 @@ class FinancialReport(models.TransientModel):
         data['journal_items'] = journal_items
         data['report_lines'] = report_lines
         # checking view type
-        return self.env.ref(
-            'base_accounting_kit.financial_report_pdf').report_action(self,
-                                                                      data)
+        # return self.env.ref(
+        #     'base_accounting_kit.financial_report_pdf').report_action(self,
+        #                                                               data)
+
+        """ Provide report values to template """
+        from datetime import datetime
+        # Get current year for display
+        current_year = datetime.now().strftime('%Y')
+        # Try to get year from date_to or date_from
+        report_year = current_year
+        if data and data.get('form'):
+            date_to = data['form'].get('date_to')
+            date_from = data['form'].get('date_from')
+            if date_to:
+                report_year = str(date_to)[:4] if date_to else current_year
+            elif date_from:
+                report_year = str(date_from)[:4] if date_from else current_year
+        
+        ctx = {
+            'data': data,
+            'journal_items': data['journal_items'],
+            'report_lines': data['report_lines'],
+            'account_report': data['form']['account_report_id'][1],
+            'currency': data['currency'],
+            'report_year': report_year,
+        }
+
+        
+        return {
+            "type": "ir.actions.client",
+            "tag": "base_accounting_kit.financial_report_action",
+            "context": {
+                "data": ctx
+            }
+        }
+
+    def export_to_xlsx(self):
+        """Export Financial Report to Excel"""
+        if not openpyxl:
+            raise UserError(self.env._("Please install openpyxl library to export Excel files."))
+        
+        self.ensure_one()
+        data = dict()
+        data['ids'] = self.env.context.get('active_ids', [])
+        data['model'] = self.env.context.get('active_model', 'ir.ui.menu')
+        data['form'] = self.read(
+            ['date_from', 'enable_filter', 'debit_credit', 'date_to',
+             'account_report_id', 'target_move', 'view_format',
+             'company_id'])[0]
+        used_context = self._build_contexts(data)
+        data['form']['used_context'] = dict(
+            used_context,
+            lang=self.env.context.get('lang') or 'en_US')
+
+        report_lines = self.get_account_lines(data['form'])
+        
+        def set_report_level(rec):
+            """This function is used to set the level of each item."""
+            level = 1
+            if not rec['parent']:
+                return level
+            else:
+                for line in report_lines:
+                    key = 'a_id' if line['type'] == 'account' else 'id'
+                    if line[key] == rec['parent']:
+                        return level + set_report_level(line)
+
+        # Set levels for all items
+        for item in report_lines:
+            item['balance'] = round(item['balance'], 2)
+            if not item['parent']:
+                item['level'] = 1
+                report_name = item['name']
+            else:
+                item['level'] = set_report_level(item)
+        
+        currency = self._get_currency()
+        account_report_name = data['form']['account_report_id'][1] if data['form']['account_report_id'] else 'Financial Report'
+
+        # Detect right-to-left languages (e.g., Arabic) to adjust sheet layout
+        lang_code = (self.env.context.get('lang') or self.env.user.lang or 'en_US')
+        base_lang = lang_code.split('_')[0]
+        rtl_langs = {'ar', 'he', 'fa', 'ur', 'yi', 'ji'}
+        is_rtl = base_lang in rtl_langs
+        
+        # Create workbook and worksheet
+        workbook = openpyxl.Workbook()
+        worksheet = workbook.active
+        worksheet.title = account_report_name[:31]  # Excel sheet name limit
+        if is_rtl:
+            worksheet.sheet_view.rightToLeft = True
+        
+        # Header styling
+        header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
+        header_font = Font(bold=True, color="FFFFFF", size=12)
+        title_font = Font(bold=True, size=14)
+        bold_font = Font(bold=True)
+        
+        # Build headers based on options first to determine column count
+        headers = [self.env._('Name')]
+        col_index = 2
+        
+        if data['form'].get('debit_credit'):
+            headers.extend([self.env._('Debit'), self.env._('Credit')])
+            col_index += 2
+        
+        headers.append(self.env._('Balance'))
+        col_index += 1
+        
+        if data['form'].get('enable_filter'):
+            headers.append(self.env._('Comparison Balance'))
+            col_index += 1
+        
+        # Company name and title
+        row = 1
+        last_col_letter = get_column_letter(col_index)
+        worksheet.merge_cells(f'A{row}:{last_col_letter}{row}')
+        cell = worksheet.cell(row=row, column=1)
+        cell.value = f"{self.env.company.name}: {account_report_name}"
+        cell.font = title_font
+        cell.alignment = Alignment(horizontal='center', vertical='center')
+        row += 2
+        
+        # Report parameters
+        if data['form'].get('date_from'):
+            worksheet.cell(row=row, column=1, value=self.env._("Date from:"))
+            worksheet.cell(row=row, column=2, value=data['form']['date_from'])
+            row += 1
+        
+        if data['form'].get('date_to'):
+            worksheet.cell(row=row, column=1, value=self.env._("Date to:"))
+            worksheet.cell(row=row, column=2, value=data['form']['date_to'])
+            row += 1
+        
+        target_move_map = {
+            'all': self.env._('All Entries'),
+            'posted': self.env._('All Posted Entries')
+        }
+        worksheet.cell(row=row, column=1, value=self.env._("Target Moves:"))
+        worksheet.cell(row=row, column=2, value=target_move_map.get(data['form'].get('target_move', 'all'), self.env._('All Entries')))
+        row += 2
+        
+        # Table headers (headers already built above)
+        for col, header in enumerate(headers, start=1):
+            cell = worksheet.cell(row=row, column=col)
+            cell.value = header
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        row += 1
+        
+        # Report data
+        total_debit = 0.0
+        total_credit = 0.0
+        total_balance = 0.0
+        total_balance_cmp = 0.0
+        
+        for line in report_lines:
+            # Indent based on level
+            indent = '  ' * (line.get('level', 1) - 1)
+            # For RTL languages, apply the spacing to the right and align text accordingly
+            if is_rtl:
+                name = f"{str(line.get('name', ''))}{indent}"
+                name_alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
+            else:
+                name = indent + str(line.get('name', ''))
+                name_alignment = Alignment(horizontal='left', vertical='center', wrap_text=True)
+            
+            # Style based on level
+            is_bold = line.get('level', 1) <= 2 or line.get('type') == 'report'
+            
+            col = 1
+            cell = worksheet.cell(row=row, column=col, value=name)
+            cell.alignment = name_alignment
+            if is_bold:
+                cell.font = bold_font
+            
+            col += 1
+            
+            if data['form'].get('debit_credit'):
+                debit = line.get('debit', 0.0)
+                credit = line.get('credit', 0.0)
+                cell = worksheet.cell(row=row, column=col, value=debit)
+                cell.number_format = '#,##0.00'
+                cell.alignment = Alignment(horizontal='right', vertical='center')
+                if is_bold:
+                    cell.font = bold_font
+                total_debit += debit
+                col += 1
+                
+                cell = worksheet.cell(row=row, column=col, value=credit)
+                cell.number_format = '#,##0.00'
+                cell.alignment = Alignment(horizontal='right', vertical='center')
+                if is_bold:
+                    cell.font = bold_font
+                total_credit += credit
+                col += 1
+            
+            balance = line.get('balance', 0.0)
+            cell = worksheet.cell(row=row, column=col, value=balance)
+            cell.number_format = '#,##0.00'
+            cell.alignment = Alignment(horizontal='right', vertical='center')
+            if is_bold:
+                cell.font = bold_font
+            total_balance += balance
+            col += 1
+            
+            if data['form'].get('enable_filter'):
+                balance_cmp = line.get('balance_cmp', 0.0)
+                cell = worksheet.cell(row=row, column=col, value=balance_cmp)
+                cell.number_format = '#,##0.00'
+                cell.alignment = Alignment(horizontal='right', vertical='center')
+                if is_bold:
+                    cell.font = bold_font
+                total_balance_cmp += balance_cmp
+                col += 1
+            
+            row += 1
+        
+        # Totals row
+        row += 1
+        col = 1
+        cell = worksheet.cell(row=row, column=col, value=self.env._("TOTAL"))
+        cell.font = bold_font
+        col += 1
+        
+        if data['form'].get('debit_credit'):
+            cell = worksheet.cell(row=row, column=col, value=total_debit)
+            cell.number_format = '#,##0.00'
+            cell.alignment = Alignment(horizontal='right', vertical='center')
+            cell.font = bold_font
+            col += 1
+            
+            cell = worksheet.cell(row=row, column=col, value=total_credit)
+            cell.number_format = '#,##0.00'
+            cell.alignment = Alignment(horizontal='right', vertical='center')
+            cell.font = bold_font
+            col += 1
+        
+        cell = worksheet.cell(row=row, column=col, value=total_balance)
+        cell.number_format = '#,##0.00'
+        cell.alignment = Alignment(horizontal='right', vertical='center')
+        cell.font = bold_font
+        totals_fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
+        for c in range(1, col_index + 1):
+            cell = worksheet.cell(row=row, column=c)
+            if c > 1:
+                cell.fill = totals_fill
+        col += 1
+        
+        if data['form'].get('enable_filter'):
+            cell = worksheet.cell(row=row, column=col, value=total_balance_cmp)
+            cell.number_format = '#,##0.00'
+            cell.alignment = Alignment(horizontal='right', vertical='center')
+            cell.font = bold_font
+            cell.fill = totals_fill
+        
+        # Adjust column widths
+        worksheet.column_dimensions['A'].width = 50
+        col_width = 18
+        for col_letter in ['B', 'C', 'D', 'E', 'F', 'G']:
+            worksheet.column_dimensions[col_letter].width = col_width
+        
+        # Save to BytesIO
+        output = io.BytesIO()
+        workbook.save(output)
+        output.seek(0)
+        
+        # Encode to base64
+        excel_file = base64.b64encode(output.read())
+        output.close()
+        
+        # Generate filename
+        filename = f"{account_report_name.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        
+        # Return download action
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/?model=ir.attachment&field=datas&filename_field=name&id=%s&download=true' % (
+                self.env['ir.attachment'].create({
+                    'name': filename,
+                    'datas': excel_file,
+                    'type': 'binary',
+                    'res_model': self._name,
+                    'res_id': self.id,
+                }).id
+            ),
+            'target': 'self',
+        }
 
     def _compute_account_balance(self, accounts):
         """ compute the balance, debit
@@ -219,59 +515,7 @@ class FinancialReport(models.TransientModel):
                 accounts = self.env['account.account'].search([
                     ('account_type', 'in', report.account_type_ids_many2many.mapped('value'))
                 ])
-                # if report.name == "Expenses":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', expense_accounts)
-                #     ])
-                # if report.name == "Income":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', income_accounts)
-                #     ])
-                # if report.name == "Gross Profit":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', gross_profit_accounts)
-                #     ])
-                # if report.name == "Depreciation":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', depreciation_accounts)
-                #     ])
-                # if report.name == "Profit and Loss":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', profit_and_loss_accounts)
-                #     ])
-                # if report.name == "Liability":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', liability_accounts)
-                #     ])
-                # if report.name == "Assets":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', asset_accounts)
-                #     ])
-                # if report.name == "Equity":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', equity_accounts)
-                #     ])
-                # if report.name == "Liabilities + Equity":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', equity_accounts + liability_accounts)
-                #     ])
-                # if report.name == "Current Assets":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', current_assest)
-                #     ])
-                # if report.name == "Non Current Assets":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', non_current_assest)
-                #     ])
-                # if report.name == "Current Liabilities":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', current_liability)
-                #     ])
-                # if report.name == "Non Current Liabilities":
-                #     accounts = self.env['account.account'].search([
-                #         ('account_type', 'in', non_current_liability)
-                #     ])
-
+              
                 res[report.id]['account'] = self._compute_account_balance(
                     accounts)
 
@@ -460,6 +704,61 @@ class FinancialReport(models.TransientModel):
             return journal.currency_id.id
         return self.env.company.currency_id.symbol
 
+    @api.model
+    def get_report_action(self, data):
+        """Method to be called from JavaScript to get the report action"""
+        # Create a temporary record with required fields from data
+        form_data = data.get('form', {})
+        account_report_id = form_data.get('account_report_id')
+        if isinstance(account_report_id, (list, tuple)) and len(account_report_id) > 0:
+            account_report_id = account_report_id[0]
+        
+        company_id = form_data.get('company_id')
+        if isinstance(company_id, (list, tuple)) and len(company_id) > 0:
+            company_id = company_id[0]
+        
+        create_vals = {
+            'account_report_id': account_report_id,
+            'target_move': form_data.get('target_move', 'posted'),
+            'date_from': form_data.get('date_from'),
+            'date_to': form_data.get('date_to'),
+            'debit_credit': form_data.get('debit_credit', True),
+            'enable_filter': form_data.get('enable_filter', False),
+        }
+        if company_id:
+            create_vals['company_id'] = company_id
+        
+        temp_record = self.create(create_vals)
+        return self.env.ref(
+            'base_accounting_kit.financial_report_pdf').report_action(temp_record, data=data)
+
+    @api.model
+    def get_xlsx_action(self, data):
+        """Method to be called from JavaScript to export XLSX"""
+        # Create a temporary record with required fields from data
+        form_data = data.get('form', {})
+        account_report_id = form_data.get('account_report_id')
+        if isinstance(account_report_id, (list, tuple)) and len(account_report_id) > 0:
+            account_report_id = account_report_id[0]
+        
+        company_id = form_data.get('company_id')
+        if isinstance(company_id, (list, tuple)) and len(company_id) > 0:
+            company_id = company_id[0]
+        
+        create_vals = {
+            'account_report_id': account_report_id,
+            'target_move': form_data.get('target_move', 'posted'),
+            'date_from': form_data.get('date_from'),
+            'date_to': form_data.get('date_to'),
+            'debit_credit': form_data.get('debit_credit', False),
+            'enable_filter': form_data.get('enable_filter', False),
+        }
+        if company_id:
+            create_vals['company_id'] = company_id
+        
+        temp_record = self.create(create_vals)
+        return temp_record.export_to_xlsx()
+
 
 class ProfitLossPdf(models.AbstractModel):
     """ Abstract model for generating PDF report value and send to template """
@@ -469,6 +768,9 @@ class ProfitLossPdf(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
+        print("*******************************************")
+        print(data)
+        print("*******************************************")
         """ Provide report values to template """
         from datetime import datetime
         # Get current year for display
