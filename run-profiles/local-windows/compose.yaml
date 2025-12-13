@@ -1,7 +1,7 @@
 services:
   odoo:
     image: ev-odoo:latest
-    command: ["-c", "./run-profiles/local-windows/env.conf", "-i", "ev-accounting-basic", "--without-demo", "all"]
+    command: ["-c", "./run-profiles/local-windows/env.conf", "-i", "ev-base-module", "--without-demo", "all"]
     restart: always
     depends_on:
       - postgres

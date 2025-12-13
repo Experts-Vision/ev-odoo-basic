@@ -2,8 +2,8 @@
 set -e
 
 # User inputs
-DOMAIN="${DOMAIN}"
-EMAIL="${EMAIL}"
+DOMAIN="odoo-demo.expertsvision.org"
+EMAIL="mahmoud.aboelsoud.p@gmail.com"
 
 # Fail if DOMAIN not set
 if [ -z "$DOMAIN" ]; then

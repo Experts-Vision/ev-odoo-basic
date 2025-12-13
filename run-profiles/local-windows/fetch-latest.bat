@@ -1,5 +1,7 @@
 @echo off
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0banner.ps1"
+echo Fetching Latest Updates ...
+git pull origin master
 docker build -t ev-odoo:latest -f ./Dockerfile ../../
 docker compose -f .\compose.yaml -p "ev-odoo-local-windows" down
 docker compose -f .\compose.yaml -p "ev-odoo-local-windows" up -d
