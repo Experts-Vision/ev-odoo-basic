@@ -8,7 +8,7 @@
     """,
     "author": "Experts Vision Company",
     "website": "https://expertsvision.org",
-    "depends": ["base", "ev-accounting-basic"],
+    "depends": ["base", "ev-accounting-basic", "ev-theme"],
     "data": [],
     "demo": [],
     "application": True,
