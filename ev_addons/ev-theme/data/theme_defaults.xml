@@ -3,7 +3,7 @@
     <data noupdate="0">
         
         <!-- Set company favicon and background image -->
-        <record id="base.main_company" model="res.company">
+        <record id="base.main_company" model="res.hamada">
             <field name="favicon" type="base64" file="ev-theme/static/description/fav.png"/>
             <field name="appbar_image" type="base64" file="ev-theme/static/description/no-bg.png"/>
         </record>
