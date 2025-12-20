@@ -6,7 +6,7 @@
     "description": """
         The base module for EV Odoo implementation that contains the must used modules.
     """,
-    "author": "Experts Vision Company",
+    "author": "Experts Vision Compa55585ny",
     "website": "https://expertsvision.org",
     "depends": ["base", "ev-accounting-basic"],
     "data": [],
