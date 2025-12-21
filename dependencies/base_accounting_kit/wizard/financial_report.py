@@ -72,6 +72,126 @@ class FinancialReport(models.TransientModel):
         result['strict_range'] = True if result['date_from'] else False
         return result
 
+    def _build_comparison_context(self, data):
+        """Build context for comparison period using comparison dates"""
+        result = {}
+        result['journal_ids'] = 'journal_ids' in data['form'] and data['form'][
+            'journal_ids'] or False
+        result['state'] = 'target_move' in data['form'] and data['form'][
+            'target_move'] or ''
+        # Use comparison dates if provided, otherwise use main dates
+        if data['form'].get('date_from_cmp') and data['form'].get('date_to_cmp'):
+            result['date_from'] = data['form']['date_from_cmp']
+            result['date_to'] = data['form']['date_to_cmp']
+            result['strict_range'] = True
+        else:
+            # If comparison dates not provided, use main dates as fallback
+            result['date_from'] = data['form'].get('date_from') or False
+            result['date_to'] = data['form'].get('date_to') or False
+            result['strict_range'] = True if result['date_from'] else False
+        return result
+
+    def _prepare_report_data(self, include_journal_items=False):
+        """Prepare report data dictionary with form, contexts, and report lines.
+        
+        Args:
+            include_journal_items (bool): Whether to include journal items in the data.
+                                          Default False for performance.
+        
+        Returns:
+            dict: Prepared data dictionary with form, contexts, report_lines, currency, etc.
+        """
+        self.ensure_one()
+        data = dict()
+        data['ids'] = self.env.context.get('active_ids', [])
+        data['model'] = self.env.context.get('active_model', 'ir.ui.menu')
+        data['form'] = self.read(
+            ['date_from', 'enable_filter', 'debit_credit', 'date_to',
+             'date_from_cmp', 'date_to_cmp', 'account_report_id', 'target_move', 
+             'view_format', 'company_id'])[0]
+        
+        # Build main context
+        used_context = self._build_contexts(data)
+        data['form']['used_context'] = dict(
+            used_context,
+            lang=self.env.context.get('lang') or 'en_US')
+        
+        # Build comparison context if comparison is enabled
+        if data['form'].get('enable_filter'):
+            comparison_context = self._build_comparison_context(data)
+            data['form']['comparison_context'] = comparison_context
+
+        # Get report lines
+        report_lines = self.get_account_lines(data['form'])
+        
+        # Set report levels
+        report_lines = self._set_report_levels(report_lines)
+        
+        # Get currency
+        currency = self._get_currency()
+        data['currency'] = currency
+        data['report_lines'] = report_lines
+        
+        # Include journal items if requested
+        if include_journal_items:
+            data['journal_items'] = self.find_journal_items(report_lines, data['form'])
+        
+        return data
+
+    def _set_report_levels(self, report_lines):
+        """Set the level for each report line item.
+        
+        Args:
+            report_lines (list): List of report line dictionaries
+        
+        Returns:
+            list: Report lines with levels set
+        """
+        def set_report_level(rec):
+            """Recursive function to set the level of each item."""
+            level = 1
+            if not rec.get('parent'):
+                return level
+            else:
+                for line in report_lines:
+                    key = 'a_id' if line.get('type') == 'account' else 'id'
+                    if line.get(key) == rec['parent']:
+                        return level + set_report_level(line)
+            return level
+
+        # Set levels for all items
+        for item in report_lines:
+            item['balance'] = round(item.get('balance', 0.0), 2)
+            if not item.get('parent'):
+                item['level'] = 1
+            else:
+                item['level'] = set_report_level(item)
+        
+        return report_lines
+
+    def _get_report_year(self, data):
+        """Get the report year from date_to or date_from.
+        
+        Args:
+            data (dict): Report data dictionary
+        
+        Returns:
+            str: Report year as string
+        """
+        from datetime import datetime
+        current_year = datetime.now().strftime('%Y')
+        report_year = current_year
+        
+        if data and data.get('form'):
+            date_to = data['form'].get('date_to')
+            date_from = data['form'].get('date_from')
+            if date_to:
+                report_year = str(date_to)[:4] if date_to else current_year
+            elif date_from:
+                report_year = str(date_from)[:4] if date_from else current_year
+        
+        return report_year
+
     @api.model
     def _get_account_report(self):
         reports = []
@@ -92,6 +212,10 @@ class FinancialReport(models.TransientModel):
 
     date_from = fields.Date(string='Start Date')
     date_to = fields.Date(string='End Date')
+    date_from_cmp = fields.Date(string='Comparison Start Date',
+                                help="Start date for comparison period")
+    date_to_cmp = fields.Date(string='Comparison End Date',
+                              help="End date for comparison period")
     debit_credit = fields.Boolean(
         string='Display Debit/Credit Columns',
         default=True,
@@ -111,69 +235,13 @@ class FinancialReport(models.TransientModel):
         """This function will be executed when we click the view button
         from the wizard. Based on the values provided in the wizard, this
         function will print pdf report"""
-        self.ensure_one()
-        data = dict()
-        data['ids'] = self.env.context.get('active_ids', [])
-        data['model'] = self.env.context.get('active_model', 'ir.ui.menu')
-        data['form'] = self.read(
-            ['date_from', 'enable_filter', 'debit_credit', 'date_to',
-             'account_report_id', 'target_move', 'view_format',
-             'company_id'])[0]
-        used_context = self._build_contexts(data)
-        data['form']['used_context'] = dict(
-            used_context,
-            lang=self.env.context.get('lang') or 'en_US')
-
-        report_lines = self.get_account_lines(data['form'])
-        # find the journal items of these accounts
-        journal_items = self.find_journal_items(report_lines, data['form'])
-
-        def set_report_level(rec):
-            """This function is used to set the level of each item.
-            This level will be used to set the alignment in the dynamic reports."""
-            level = 1
-            if not rec['parent']:
-                return level
-            else:
-                for line in report_lines:
-                    key = 'a_id' if line['type'] == 'account' else 'id'
-                    if line[key] == rec['parent']:
-                        return level + set_report_level(line)
-
-        # finding the root
-        for item in report_lines:
-            item['balance'] = round(item['balance'], 2)
-            if not item['parent']:
-                item['level'] = 1
-                parent = item
-                report_name = item['name']
-                id = item['id']
-                report_id = item['r_id']
-            else:
-                item['level'] = set_report_level(item)
-        currency = self._get_currency()
-        data['currency'] = currency
-        data['journal_items'] = journal_items
-        data['report_lines'] = report_lines
-        # checking view type
-        # return self.env.ref(
-        #     'base_accounting_kit.financial_report_pdf').report_action(self,
-        #                                                               data)
-
-        """ Provide report values to template """
-        from datetime import datetime
-        # Get current year for display
-        current_year = datetime.now().strftime('%Y')
-        # Try to get year from date_to or date_from
-        report_year = current_year
-        if data and data.get('form'):
-            date_to = data['form'].get('date_to')
-            date_from = data['form'].get('date_from')
-            if date_to:
-                report_year = str(date_to)[:4] if date_to else current_year
-            elif date_from:
-                report_year = str(date_from)[:4] if date_from else current_year
+        # Prepare report data with journal items
+        data = self._prepare_report_data(include_journal_items=True)
         
+        # Get report year
+        report_year = self._get_report_year(data)
+        
+        # Build context for template
         ctx = {
             'data': data,
             'journal_items': data['journal_items'],
@@ -181,12 +249,16 @@ class FinancialReport(models.TransientModel):
             'account_report': data['form']['account_report_id'][1],
             'currency': data['currency'],
             'report_year': report_year,
+            'balance_label': self.env._('Balance'),
         }
 
+        # Get the report name for breadcrumbs
+        report_name = data['form']['account_report_id'][1] if data['form']['account_report_id'] else 'Financial Report'
         
         return {
             "type": "ir.actions.client",
             "tag": "base_accounting_kit.financial_report_action",
+            "name": report_name,
             "context": {
                 "data": ctx
             }
@@ -197,42 +269,9 @@ class FinancialReport(models.TransientModel):
         if not openpyxl:
             raise UserError(self.env._("Please install openpyxl library to export Excel files."))
         
-        self.ensure_one()
-        data = dict()
-        data['ids'] = self.env.context.get('active_ids', [])
-        data['model'] = self.env.context.get('active_model', 'ir.ui.menu')
-        data['form'] = self.read(
-            ['date_from', 'enable_filter', 'debit_credit', 'date_to',
-             'account_report_id', 'target_move', 'view_format',
-             'company_id'])[0]
-        used_context = self._build_contexts(data)
-        data['form']['used_context'] = dict(
-            used_context,
-            lang=self.env.context.get('lang') or 'en_US')
-
-        report_lines = self.get_account_lines(data['form'])
-        
-        def set_report_level(rec):
-            """This function is used to set the level of each item."""
-            level = 1
-            if not rec['parent']:
-                return level
-            else:
-                for line in report_lines:
-                    key = 'a_id' if line['type'] == 'account' else 'id'
-                    if line[key] == rec['parent']:
-                        return level + set_report_level(line)
-
-        # Set levels for all items
-        for item in report_lines:
-            item['balance'] = round(item['balance'], 2)
-            if not item['parent']:
-                item['level'] = 1
-                report_name = item['name']
-            else:
-                item['level'] = set_report_level(item)
-        
-        currency = self._get_currency()
+        # Prepare report data (without journal items for performance)
+        data = self._prepare_report_data(include_journal_items=False)
+        report_lines = data['report_lines']
         account_report_name = data['form']['account_report_id'][1] if data['form']['account_report_id'] else 'Financial Report'
 
         # Detect right-to-left languages (e.g., Arabic) to adjust sheet layout
@@ -262,12 +301,36 @@ class FinancialReport(models.TransientModel):
             headers.extend([self.env._('Debit'), self.env._('Credit')])
             col_index += 2
         
-        headers.append(self.env._('Balance'))
-        col_index += 1
-        
-        if data['form'].get('enable_filter'):
-            headers.append(self.env._('Comparison Balance'))
+        # balance header
+        date_from = data['form'].get("date_from")
+        date_to = data['form'].get("date_to")
+        if date_from and date_to:
+            headers.append({
+                "label": self.env._('Balance'),
+                "date": f"{date_from} : {date_to}"
+            })
             col_index += 1
+        else:
+            headers.append({
+                "label": self.env._('Balance'),
+            })
+            col_index += 1
+
+        # comparison balance header
+        if data['form'].get('enable_filter'):
+            date_from_cmp = data['form'].get("date_from_cmp")
+            date_to_cmp = data['form'].get("date_to_cmp")
+            if date_from_cmp and date_to_cmp:
+                headers.append({
+                    "label": self.env._('Balance'),
+                    "date": f"{date_from_cmp} : {date_to_cmp}"
+                })
+            else:
+                headers.append({
+                    "label": self.env._('Balance'),
+                })
+            col_index += 1
+
         
         # Company name and title
         row = 1
@@ -279,16 +342,6 @@ class FinancialReport(models.TransientModel):
         cell.alignment = Alignment(horizontal='center', vertical='center')
         row += 2
         
-        # Report parameters
-        if data['form'].get('date_from'):
-            worksheet.cell(row=row, column=1, value=self.env._("Date from:"))
-            worksheet.cell(row=row, column=2, value=data['form']['date_from'])
-            row += 1
-        
-        if data['form'].get('date_to'):
-            worksheet.cell(row=row, column=1, value=self.env._("Date to:"))
-            worksheet.cell(row=row, column=2, value=data['form']['date_to'])
-            row += 1
         
         target_move_map = {
             'all': self.env._('All Entries'),
@@ -301,7 +354,20 @@ class FinancialReport(models.TransientModel):
         # Table headers (headers already built above)
         for col, header in enumerate(headers, start=1):
             cell = worksheet.cell(row=row, column=col)
-            cell.value = header
+            if isinstance(header, dict):
+                # Build header value with date if available
+                header_value = header.get('label', '')
+                cell.value = header_value
+                if header.get('date'):
+                    date_value = header.get('date', "")
+                    above_cell = worksheet.cell(row=row-1, column=col)
+                    above_cell.value = date_value
+                    # Set column width to fit the date value
+                    column_letter = get_column_letter(col)
+                    worksheet.column_dimensions[column_letter].width = 30
+                    above_cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+            else:
+                cell.value = header
             cell.font = header_font
             cell.fill = header_fill
             cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
@@ -318,7 +384,7 @@ class FinancialReport(models.TransientModel):
             indent = '  ' * (line.get('level', 1) - 1)
             # For RTL languages, apply the spacing to the right and align text accordingly
             if is_rtl:
-                name = f"{str(line.get('name', ''))}{indent}"
+                name = indent + str(line.get('name', ''))  
                 name_alignment = Alignment(horizontal='right', vertical='center', wrap_text=True)
             else:
                 name = indent + str(line.get('name', ''))
@@ -415,9 +481,9 @@ class FinancialReport(models.TransientModel):
         
         # Adjust column widths
         worksheet.column_dimensions['A'].width = 50
-        col_width = 18
-        for col_letter in ['B', 'C', 'D', 'E', 'F', 'G']:
-            worksheet.column_dimensions[col_letter].width = col_width
+        # col_width = 18
+        # for col_letter in ['B', 'C', 'D', 'E', 'F', 'G']:
+        #     worksheet.column_dimensions[col_letter].width = col_width
         
         # Save to BytesIO
         output = io.BytesIO()
@@ -545,7 +611,10 @@ class FinancialReport(models.TransientModel):
         res = self.with_context(
             data.get('used_context'))._compute_report_balance(child_reports)
         if data['enable_filter']:
-            comparison_res = self._compute_report_balance(child_reports)
+            # Use comparison_context if available, otherwise use empty context (all historical data)
+            comparison_context = data.get('comparison_context', {})
+            comparison_res = self.with_context(
+                comparison_context)._compute_report_balance(child_reports)
             for report_id, value in comparison_res.items():
                 res[report_id]['comp_bal'] = value['balance']
                 report_acc = res[report_id].get('account')
@@ -722,6 +791,8 @@ class FinancialReport(models.TransientModel):
             'target_move': form_data.get('target_move', 'posted'),
             'date_from': form_data.get('date_from'),
             'date_to': form_data.get('date_to'),
+            'date_from_cmp': form_data.get('date_from_cmp'),
+            'date_to_cmp': form_data.get('date_to_cmp'),
             'debit_credit': form_data.get('debit_credit', True),
             'enable_filter': form_data.get('enable_filter', False),
         }
@@ -750,6 +821,8 @@ class FinancialReport(models.TransientModel):
             'target_move': form_data.get('target_move', 'posted'),
             'date_from': form_data.get('date_from'),
             'date_to': form_data.get('date_to'),
+            'date_from_cmp': form_data.get('date_from_cmp'),
+            'date_to_cmp': form_data.get('date_to_cmp'),
             'debit_credit': form_data.get('debit_credit', False),
             'enable_filter': form_data.get('enable_filter', False),
         }
@@ -792,5 +865,6 @@ class ProfitLossPdf(models.AbstractModel):
             'account_report': data['form']['account_report_id'][1],
             'currency': data['currency'],
             'report_year': report_year,
+            'balance_label': self.env._('Balance'),
         }
         return ctx

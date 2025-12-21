@@ -14,13 +14,17 @@
                     <group string="Type">
                         <field name="target_move" widget="radio"/>
                         <field name="view_format" widget="radio" invisible="1"/>
-                        <field name="enable_filter" invisible="1"/>
+                        <field name="enable_filter"/>
                         <field name="debit_credit"/>
                         <field name="company_id" invisible="1"/>
                     </group>
                 </group>
+                <group string="Comparison Dates" invisible="not enable_filter">
+                    <field name="date_from_cmp" required="enable_filter"/>
+                    <field name="date_to_cmp" required="enable_filter"/>
+                </group>
                 <footer>
-                    <button string="Print" name="view_report_pdf" type="object"
+                    <button string="View" name="view_report_pdf" type="object"
                             class="btn-primary"/>
                     <button string="Discard" class="btn-secondary"
                             special="cancel"/>

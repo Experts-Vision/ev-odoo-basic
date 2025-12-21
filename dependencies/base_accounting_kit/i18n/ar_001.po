@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-10 09:15+0000\n"
-"PO-Revision-Date: 2025-12-10 09:15+0000\n"
+"POT-Creation-Date: 2025-12-21 03:08+0000\n"
+"PO-Revision-Date: 2025-12-21 03:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -231,6 +231,11 @@ msgstr ""
 #. module: base_accounting_kit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.multiple_invoice_wizard_preview
 msgid "<span itemprop=\"name\">Deco Addict</span>"
+msgstr ""
+
+#. module: base_accounting_kit
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial
+msgid "<span style=\"margin: 0 3px;\">:</span>"
 msgstr ""
 
 #. module: base_accounting_kit
@@ -1190,7 +1195,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.day_book_report_template
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_bank_book
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_cash_book
-#: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_financial
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_general_ledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_partnerledger
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.report_trial_balance
@@ -1549,10 +1553,19 @@ msgid "Comparison"
 msgstr "مقارنة"
 
 #. module: base_accounting_kit
-#. odoo-python
-#: code:addons/base_accounting_kit/wizard/financial_report.py:0
-msgid "Comparison Balance"
-msgstr ""
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.financial_report_view_form
+msgid "Comparison Dates"
+msgstr "تواريخ المقارنة"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields,field_description:base_accounting_kit.field_financial_report__date_to_cmp
+msgid "Comparison End Date"
+msgstr "تاريخ نهاية المقارنة"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields,field_description:base_accounting_kit.field_financial_report__date_from_cmp
+msgid "Comparison Start Date"
+msgstr "تاريخ بدء المقارنة"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_aged_trial_balance__use_sections
@@ -1901,7 +1914,6 @@ msgstr "تاريخ البدء"
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
-#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 msgid "Date from:"
 msgstr ""
 
@@ -1923,7 +1935,6 @@ msgstr ""
 #. module: base_accounting_kit
 #. odoo-python
 #: code:addons/base_accounting_kit/wizard/account_balance_report.py:0
-#: code:addons/base_accounting_kit/wizard/financial_report.py:0
 msgid "Date to:"
 msgstr ""
 
@@ -2109,7 +2120,7 @@ msgstr ""
 #. module: base_accounting_kit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.financial_report_view_form
 msgid "Discard"
-msgstr ""
+msgstr "تجاهل"
 
 #. module: base_accounting_kit
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.view_bank_reconcile_widget_form
@@ -2301,6 +2312,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_accounting_kit.field_kit_account_tax_report__date_to
 msgid "End Date"
 msgstr "تاريخ الانتهاء"
+
+#. module: base_accounting_kit
+#: model:ir.model.fields,help:base_accounting_kit.field_financial_report__date_to_cmp
+msgid "End date for comparison period"
+msgstr ""
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_asset_asset__method_end
@@ -2614,7 +2630,7 @@ msgstr "المبلغ الإجمالي"
 #. module: base_accounting_kit
 #: model:account.financial.report,name:base_accounting_kit.financial_report_gross_profit
 msgid "Gross Profit"
-msgstr ""
+msgstr "إجمالي الربح"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_asset_asset__value
@@ -4411,6 +4427,11 @@ msgid "Start Date"
 msgstr "تاريخ البداية"
 
 #. module: base_accounting_kit
+#: model:ir.model.fields,help:base_accounting_kit.field_financial_report__date_from_cmp
+msgid "Start date for comparison period"
+msgstr ""
+
+#. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_account_recurring_payments__date
 msgid "Starting Date"
 msgstr "تاريخ البدء"
@@ -4915,8 +4936,9 @@ msgstr "عمودي"
 #. module: base_accounting_kit
 #: model:ir.model.fields.selection,name:base_accounting_kit.selection__account_financial_report__type__sum
 #: model_terms:ir.ui.view,arch_db:base_accounting_kit.account_move_line_view_tree
+#: model_terms:ir.ui.view,arch_db:base_accounting_kit.financial_report_view_form
 msgid "View"
-msgstr "رأي"
+msgstr "عرض"
 
 #. module: base_accounting_kit
 #: model:ir.model.fields,field_description:base_accounting_kit.field_res_partner__warning_stage

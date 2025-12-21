@@ -2,75 +2,83 @@
 <templates xml:space="preserve">
     <t t-name="base_accounting_kit.financial_report_template">
         <Layout display="{ controlPanel: {} }">
-              <t t-set-slot="control-panel-create-button">
+            <t t-set-slot="control-panel-create-button">
                 <button t-on-click="print" type="button" class="btn btn-primary" title="Print">Print</button>
                 <button t-on-click="xlsx" type="button" class="btn btn-secondary" title="Xlsx">Xlsx</button>
             </t>
             <t t-set-slot="default">
-                <div class="reprot-container">
-                    <div class="modern-report-card">
-                        <div class="modern-report-header">
-                            <table class="modern-report-header-table">
+            <t t-if="context.data">
+                <div class="financial_report_background">
+                    <div class="financial_report_container">
+                        <table class="financial_report_table">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <h2 class="modern-report-title" t-esc="context.data.data['form']['account_report_id'][1]"/>
-                                    </td>
-                                    <td>
-                                        <div class="modern-year-badge">
-                                            <span t-esc="context.data.report_year"/>
+                                    <th></th>
+                                    <th>
+                                        <div class="financial_report_date_box">
+                                            <t t-if="context.data.data.form.date_from and context.data.data.form.date_to">
+                                                <span t-esc="context.data.data.form.date_from"/>
+                                                <span style="margin: 0 3px;">:</span>
+                                                <span t-esc="context.data.data.form.date_to"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="context.data.report_year"/>
+                                            </t>
                                         </div>
-                                    </td>
+                                        <span>Balance</span>
+                                    </th>
+                                    <t t-if="context.data.data.form.comparison_context">
+                                        <th >
+                                            <div class="financial_report_date_box">
+                                                <span t-esc="context.data.data.form.comparison_context.date_from"/>
+                                                <span style="margin: 0 3px;">:</span>
+                                                <span t-esc="context.data.data.form.comparison_context.date_to"/>
+                                            </div>
+                                            <span>Balance</span>
+                                        </th>
+                                    </t>
                                 </tr>
-                            </table>
-                        </div>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="context.data.report_lines" t-key="line.id + line.name" t-as="line">
+                                    <t t-if="line.level != 0">
+                                        <t t-set="line_level" t-value="line.level || 1"/>
 
-                        <div class="modern-balance-header" style="padding-bottom: 12px; border-bottom: 1px solid #e0e0e0; margin-bottom: 16px;">
-                            Balance
-                        </div>
+                                        <t t-set="is_highlighted" t-value="line_level == 2"/>
+                                        <t t-set="is_bold" t-value="line_level == 3"/>
+                                        <t t-set="indent_px" t-value="(line_level - 1) * 20"/>
+                                        <t t-set="lang" t-value="props.action.context.lang"/>
+                                        <t t-set="is_rtl" t-value="lang &amp;&amp; ['ar', 'he', 'fa', 'ur', 'yi', 'ji'].includes(lang.split('_')[0])"/>
+                                        <t t-set="padding_style" t-value="is_rtl ? ('padding-right: ' + indent_px + 'px;') : ('padding-left: ' + indent_px + 'px;')"/>
 
-                        <div class="modern-report-lines">
-                            <t t-foreach="context.data.report_lines" t-key="line.id" t-as="line">
-                                <t t-if="line.level != 0">
-                                    <t t-set="line_level" t-value="line.level || 1"/>
-                                    
-
-                                    <t t-set="is_highlighted" t-value="line_level == 1"/>
-                                    <t t-set="is_arrow_highlighted" t-value="line_level == 2"/>
-                                    <t t-set="is_bold" t-value="line_level == 3"/>
-                                    <t t-set="indent_px" t-value="(line_level - 1) * 20"/>
-                                    <t t-set="lang" t-value="props.action.context.lang"/>
-                                    <t t-set="is_rtl" t-value="lang &amp;&amp; ['ar', 'he', 'fa', 'ur', 'yi', 'ji'].includes(lang.split('_')[0])"/>
-                                    <t t-set="padding_style" t-value="is_rtl ? ('padding-right: ' + indent_px + 'px;') : ('padding-left: ' + indent_px + 'px;')"/>
-                                    <t t-set="chevron_symbol" t-value="is_rtl ? '◀' : '▶'"/>
-
-                                    <div t-attf-class="modern-report-line #{((is_highlighted || is_arrow_highlighted) &amp;&amp; 'modern-report-line-highlight') || ''} #{(is_bold &amp;&amp; 'modern-report-line-bold') || ''}">
-                                        <table class="modern-report-line-table">
-                                            <tr>
-                                                <td t-att-style="padding_style">
-                                                    <div class="modern-line-name">
-                                                        <t t-if="is_arrow_highlighted">
-                                                            <span class="modern-line-chevron" t-esc="chevron_symbol"/>
-                                                        </t>
-                                                        <span class="modern-line-content" t-att-style="(is_bold &amp;&amp; 'font-weight: 600;') || ''">
-                                                            <span t-esc="line['name']"/>
-                                                        </span>
-                                                    </div>
+                                        <t t-set="row_class" t-value="''"/>
+                                        <t t-if="is_highlighted">
+                                            <t t-set="row_class" t-value="'highlighted'"/>
+                                        </t>
+                                        <t t-if="is_bold">
+                                            <t t-set="row_class" t-value="row_class ? (row_class + ' bold') : 'bold'"/>
+                                        </t>
+                                        <tr t-att-class="row_class">
+                                            <td t-att-style="padding_style">
+                                                <span t-esc="line['name']"/>
+                                            </td>
+                                            <td class="financial_report_balance_value">
+                                                <span t-esc="line['balance']"/>
+                                            </td>
+                                            <t t-if="context.data.data.form.comparison_context">
+                                                <td class="financial_report_balance_value">
+                                                    <span t-esc="line['balance_cmp']"/>
                                                 </td>
-                                                <td>
-                                                    <div class="modern-line-balance">
-                                                        <span >
-                                                            <span t-esc="line['balance']"/>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                            </t>
+                                        </tr>
+
+                                    </t>
                                 </t>
-                            </t>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </t>
             </t>
         </Layout>
     </t>

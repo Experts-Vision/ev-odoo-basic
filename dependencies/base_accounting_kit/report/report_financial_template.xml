@@ -7,310 +7,135 @@
                 <t t-set="data_report_header_spacing" t-value="9"/>
                 <t t-set="data_report_dpi" t-value="110"/>
                 <style>
-                    .modern-report-card {
-                        background: white;
-                        border-radius: 8px;
+                   .financial_report_container {
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                        background-color: white;
+                        font-size: 16px;
+                        border-radius: 5px;
                         padding: 24px;
-                        margin: 16px auto;
-                        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                        margin-bottom: 100px;
+                        width: 100%;
+                    }
+
+                    table, tbody, thead, tr, th, td {
+                        border: none;
+                    }
+
+                    .financial_report_table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+
+                    .financial_report_table thead th {
+                        font-weight: 500;
+                        padding-bottom: 16px;
 
                     }
-                    .modern-report-header {
-                        margin-bottom: 20px;
-                        padding-bottom: 12px;
-                        border-bottom: 1px solid #e0e0e0;
-                        overflow: hidden;
-                    }
-                    .modern-report-header-table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        border: none;
-                    }
-                    .modern-report-header-table td {
-                        padding: 0;
-                        vertical-align: middle;
-                        border: none;
-                    }
-                    .modern-report-header-table tr {
-                        border: none;
-                    }
-                    .modern-report-header-table td:first-child {
-                        width: 70%;
-                    }
-                    .modern-report-header-table td:last-child {
-                        width: 30%;
-                        text-align: right;
-                    }
-                    .modern-report-title {
-                        font-size: 20px;
-                        font-weight: 600;
-                        margin: 0;
-                    }
-                    .modern-year-badge {
-                        background: white;
-                        border: 1px solid #ddd;
-                        padding: 8px 16px;
-                        border-radius: 4px;
+
+                    .financial_report_date_box {
+                        padding: 6px 12px;
                         font-size: 14px;
-                        display: inline-block;
-                    }
-                    .modern-report-lines {
-                        margin-top: 16px;
-                    }
-                    .modern-report-line {
-                        padding: 8px 0;
-                        min-height: 32px;
-                        overflow: hidden;
-                    }
-                    .modern-report-line-table {
+                        font-weight: normal;
+                        border: 1px solid #E5E7EB;
                         width: 100%;
-                        border-collapse: collapse;
-                        border: none;
+                        margin-bottom: 10px;
                     }
-                    .modern-report-line-table td {
-                        padding: 8px 0;
-                        vertical-align: middle;
-                        border: none;
-                    }
-                    .modern-report-line-table tr {
-                        border: none;
-                    }
-                    td, tr, table, tbody, thead, tfoot {
-                        border: none !important;
-                    }
-                    .modern-report-line-table td:first-child {
-                        width: 70%;
-                    }
-                    .modern-report-line-table td:last-child {
-                        width: 30%;
-                        text-align: right;
-                    }
-                    .modern-report-line-highlight {
-                        background-color: #f5f5f5;
-                        padding: 12px;
-                        margin: 4px 0;
-                        border-radius: 4px;
+                    .financial_report_table thead th span {
                         font-weight: 600;
                     }
-                    .modern-line-name {
-                        display: block;
+
+                    .financial_report_table tbody tr.highlighted {
+                        background-color: #CCCED1;
                     }
-                    .modern-line-indent {
-                        width: 16px;
-                        display: inline-block;
+
+                    .financial_report_table td {
+                        padding: 5px 18px;
                     }
-                    .modern-line-chevron {
-                        width: 16px;
-                        color: #999;
-                        margin-right: 8px;
-                        display: inline-block;
-                    }
-                    .modern-line-content {
-                        display: inline-block;
-                    }
-                    .modern-line-balance {
-                        display: inline-block;
-                    }
-                    .modern-info-icon {
-                        color: #999;
-                        font-size: 12px;
-                    }
-                    .modern-balance-header {
-                        font-weight: 500;
-                        color: #666;
-                        text-align: right;
-                        margin: 0 16px;
-                    }
-                    .modern-report-line-bold {
+
+                    .financial_report_table tr.bold  {
                         font-weight: 600;
+                    }
+
+                    .financial_report_table tbody tr  {
+                        border-bottom: 1px solid #E5E7EB;
+                    }
+                    .financial_report_balance_value {
+                        text-align: center;
+                        min-width: 100px;
                     }
                 </style>
                 <div class="page">
-                    <!-- Old implementation -->
-                    <!-- <h2 t-esc="data['form']['account_report_id'][1]"/>
-                        <div class="row mt32 mb32">
-                            <div class="col-4">
-                                <strong>Target Moves:</strong>
-                                <p>
-                                    <span t-if="data['form']['target_move'] == 'all'">All Entries</span>
-                                    <span t-if="data['form']['target_move'] == 'posted'">All Posted Entries</span>
-                                </p>
-                            </div>
-                            <div class="col-4">
-                                <p>
-                                    <t t-if="data['form']['date_from']">
-                                        <strong>Date from :</strong>
-                                        <span t-esc="data['form']['date_from']"/>
-                                        <br/>
-                                    </t>
-                                    <t t-if="data['form']['date_to']">
-                                        <strong>Date to :</strong>
-                                        <span t-esc="data['form']['date_to']"/>
-                                    </t>
-                                </p>
-                            </div>
-                        </div>
-                        <table class="table table-sm table-reports" t-if="data['form']['debit_credit'] == 1">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th class="text-right">Debit</th>
-                                    <th class="text-right">Credit</th>
-                                    <th class="text-right">Balance</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr t-foreach="report_lines" t-as="a">
-                                    <t t-if="a['level'] != 0">
-                                        <t t-if="a.get('level') &gt; 3">
-                                            <t t-set="style" t-value="'font-weight: normal;'"/>
-                                        </t>
-                                        <t t-if="not a.get('level') &gt; 3">
-                                            <t t-set="style" t-value="'font-weight: bold;'"/>
-                                        </t>
 
-                                        <td>
-                                            <span style="color: white;" t-esc="'..' * a.get('level', 0)"/>
-                                            <span t-att-style="style" t-esc="a.get('name')"/>
-                                        </td>
-                                        <td class="text-right" style="white-space: text-nowrap;">
-                                            <span t-att-style="style" t-esc="a.get('debit')" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
-                                        </td>
-                                        <td class="text-right" style="white-space: text-nowrap;">
-                                            <span t-att-style="style" t-esc="a.get('credit')" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
-                                        </td>
-                                        <td class="text-right" style="white-space: text-nowrap;">
-                                            <span t-att-style="style" t-esc="a.get('balance')" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
-                                        </td>
-                                    </t>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <table class="table table-sm table-reports" t-if="not data['form']['enable_filter'] and not data['form']['debit_credit']">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th class="text-right">Balance</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr t-foreach="report_lines" t-as="a">
-                                    <t t-if="a['level'] != 0">
-                                        <t t-if="a.get('level') &gt; 3">
-                                            <t t-set="style" t-value="'font-weight: normal;'"/>
-                                        </t>
-                                        <t t-if="not a.get('level') &gt; 3">
-                                            <t t-set="style" t-value="'font-weight: bold;'"/>
-                                        </t>
-
-                                        <td>
-                                            <span style="color: white;" t-esc="'..' * a.get('level', 0)"/>
-                                            <span t-att-style="style" t-esc="a.get('name')"/>
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-att-style="style" t-esc="a.get('balance')" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
-                                        </td>
-                                    </t>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <table class="table table-sm table-reports" t-if="data['form']['enable_filter'] == 1 and not data['form']['debit_credit']">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th class="text-right">Balance</th>
-                                    <th class="text-right">
-                                        <span>Comp</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr t-foreach="report_lines" t-as="a">
-                                    <t t-if="a['level'] != 0">
-                                        <t t-if="a.get('level') &gt; 3">
-                                            <t t-set="style" t-value="'font-weight: normal;'"/>
-                                        </t>
-                                        <t t-if="not a.get('level') &gt; 3">
-                                            <t t-set="style" t-value="'font-weight: bold;'"/>
-                                        </t>
-                                        <td>
-                                            <span style="color: white;" t-esc="'..'"/>
-                                            <span t-att-style="style" t-esc="a.get('name')"/>
-                                        </td>
-                                        <td class="text-end">
-                                            <span t-att-style="style" t-esc="a.get('balance')" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
-                                        </td>
-                                        <td class="text-end">
-                                            <span t-att-style="style" t-esc="a.get('balance_cmp')"/>
-                                        </td>
-                                    </t>
-                                </tr>
-                            </tbody>
-                        </table> -->
                     <!-- New implementation -->
-                    <div class="modern-report-card">
-                        <div class="modern-report-header">
-                            <table class="modern-report-header-table">
+                    <div class="financial_report_container">
+                        <table class="financial_report_table">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <h2 class="modern-report-title" t-esc="data['form']['account_report_id'][1]"/>
-                                    </td>
-                                    <td>
-                                        <div class="modern-year-badge">
-                                            <span t-esc="report_year"/>
+                                    <th></th>
+                                    <th>
+                                        <div class="financial_report_date_box">
+                                            <t t-if="data.get('form', {}).get('date_from') and data.get('form', {}).get('date_to')">
+                                                <span t-esc="data.get('form', {}).get('date_from', '')"/>
+                                                <span style="margin: 0 3px;">:</span>
+                                                <span t-esc="data.get('form', {}).get('date_to', '')"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="report_year"/>
+                                            </t>
                                         </div>
-                                    </td>
+                                        <span t-esc="balance_label"/>
+                                    </th>
+                                    <t t-if="data.get('form', {}).get('comparison_context')">
+                                        <th >
+                                            <div class="financial_report_date_box">
+                                                <span t-esc="data.get('form', {}).get('comparison_context', {}).get('date_from', '')"/>
+                                                <span style="margin: 0 3px;">:</span>
+                                                <span t-esc="data.get('form', {}).get('comparison_context', {}).get('date_to', '')"/>
+                                            </div>
+                                            <span t-esc="balance_label"/>
+                                        </th>
+                                    </t>
                                 </tr>
-                            </table>
-                        </div>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="report_lines" t-key="line.get('id', '') + line.get('name', '')" t-as="line">
+                                    <t t-if="line.get('level', 0) != 0">
+                                        <t t-set="line_level" t-value="line.get('level') or 1"/>
 
-                        <div class="modern-balance-header" style="padding-bottom: 12px; border-bottom: 1px solid #e0e0e0; margin-bottom: 16px;">
-                            Balance
-                        </div>
+                                        <t t-set="is_highlighted" t-value="line_level == 2"/>
+                                        <t t-set="is_bold" t-value="line_level == 3"/>
+                                        <t t-set="indent_px" t-value="(line_level - 1) * 20"/>
+                                        <t t-set="lang" t-value="data.get('form', {}).get('used_context', {}).get('lang') or 'en_US'"/>
+                                        <t t-set="lang_parts" t-value="lang.split('_') if lang else ['en']"/>
+                                        <t t-set="lang_base" t-value="lang_parts[0] if lang_parts else 'en'"/>
+                                        <t t-set="rtl_langs" t-value="['ar', 'he', 'fa', 'ur', 'yi', 'ji']"/>
+                                        <t t-set="is_rtl" t-value="lang_base in rtl_langs"/>
+                                        <t t-set="padding_style" t-value="'padding-right: %spx;' % indent_px if is_rtl else 'padding-left: %spx;' % indent_px"/>
 
-                        <div class="modern-report-lines">
-                            <t t-foreach="report_lines" t-as="line">
-                                <t t-if="line.get('level', 0) != 0">
-                                    <t t-set="line_level" t-value="line.get('level', 1)"/>
-
-
-                                    <t t-set="is_highlighted" t-value="line_level == 1"/>
-                                    <t t-set="is_arrow_highlighted" t-value="line_level == 2"/>
-                                    <t t-set="is_bold" t-value="line_level == 3"/>
-                                    <t t-set="indent_px" t-value="(line_level - 1) * 20"/>
-                                    <t t-set="is_rtl" t-value="env.lang and env.lang.split('_')[0] in ['ar', 'he', 'fa', 'ur', 'yi', 'ji']"/>
-                                    <t t-set="padding_style" t-value="is_rtl and ('padding-right: %dpx;' % indent_px) or ('padding-left: %dpx;' % indent_px)"/>
-                                    <t t-set="chevron_symbol" t-value="is_rtl and '◀' or '▶'"/>
-
-                                    <div t-attf-class="modern-report-line #{(is_highlighted or is_arrow_highlighted) and 'modern-report-line-highlight' or ''} #{is_bold and 'modern-report-line-bold' or ''}">
-                                        <table class="modern-report-line-table">
-                                            <tr>
-                                                <td t-att-style="padding_style">
-                                                    <div class="modern-line-name">
-                                                        <t t-if="is_arrow_highlighted">
-                                                            <span class="modern-line-chevron" t-esc="chevron_symbol"/>
-                                                        </t>
-                                                        <span class="modern-line-content" t-att-style="is_bold and 'font-weight: 600;' or ''">
-                                                            <span t-esc="line['name']"/>
-                                                        </span>
-                                                    </div>
+                                        <t t-set="row_class" t-value="''"/>
+                                        <t t-if="is_highlighted">
+                                            <t t-set="row_class" t-value="'highlighted'"/>
+                                        </t>
+                                        <t t-if="is_bold">
+                                            <t t-set="row_class" t-value="(row_class + ' bold') if row_class else 'bold'"/>
+                                        </t>
+                                        <tr t-att-class="row_class">
+                                            <td t-att-style="padding_style">
+                                                <span t-esc="line.get('name', '')"/>
+                                            </td>
+                                            <td class="financial_report_balance_value">
+                                                <span t-esc="line.get('balance', 0.0)"/>
+                                            </td>
+                                            <t t-if="data.get('form', {}).get('comparison_context')">
+                                                <td class="financial_report_balance_value">
+                                                    <span t-esc="line.get('balance_cmp', 0.0)"/>
                                                 </td>
-                                                <td>
-                                                    <div class="modern-line-balance">
-                                                        <span >
-                                                            <span t-esc="line['balance']" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                            </t>
+                                        </tr>
+
+                                    </t>
                                 </t>
-                            </t>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </t>

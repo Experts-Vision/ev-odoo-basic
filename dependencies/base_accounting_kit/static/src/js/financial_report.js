@@ -5,7 +5,7 @@ import { Layout } from "@web/search/layout";
 import { useService } from "@web/core/utils/hooks";
 
 
-class FinancialReport extends Component {
+class FinancialReport extends Component { 
     static template = "base_accounting_kit.financial_report_template"
     static components = {
         Layout
@@ -16,10 +16,14 @@ class FinancialReport extends Component {
         this.action = useService("action")
         this.orm = useService("orm")
 
+        if (!this.context.data) {
+            // navigate to the previous page
+            window.history.back();
+        }
         
     }
 
-    async print() {
+    async print() { 
         const data = this.context.data.data;
         if (!data) {
             console.error("No data available for printing");
@@ -67,4 +71,4 @@ class FinancialReport extends Component {
 
 
 
-registry.category("actions").add("base_accounting_kit.financial_report_action", FinancialReport);
+registry.category("actions").add("base_accounting_kit.financial_report_action", FinancialReport)
