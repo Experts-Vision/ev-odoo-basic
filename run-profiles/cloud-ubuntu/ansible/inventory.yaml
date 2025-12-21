@@ -14,6 +14,13 @@ all:
       DOMAIN: "odoo-dev.expertsvision.org"
       EMAIL: "mahmoud.aboelsoud.p@gmail.com"
 
+    odoo-demo:
+      ansible_host: odoo-demo.expertsvision.org
+      ansible_user: ubuntu
+      ansible_ssh_private_key_file: mahmoud-key.pem
+      DOMAIN: "odoo-demo.expertsvision.org"
+      EMAIL: "mahmoud.aboelsoud.p@gmail.com"
+
     ashraqat:
       ansible_host: ashraqat.expertsvision.org
       ansible_user: ubuntu
